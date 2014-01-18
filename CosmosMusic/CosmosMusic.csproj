@@ -220,6 +220,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Albums\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Albums\Browse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

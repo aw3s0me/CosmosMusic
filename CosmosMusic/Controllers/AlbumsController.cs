@@ -23,11 +23,13 @@ namespace CosmosMusic2.Controllers
 
         public ActionResult Browse(string genre)
         {
-            var genreEntity = AlbumsContext.Genre.FirstOrDefault(p => p.name == genre);
-            var albums = AlbumsContext.Artists.Where(p => p.Genre == genreEntity).ToList();
-            
-            return View(albums);
+            //var albums = AlbumsContext.Artists.Where(p => p.Genre == genreEntity).ToList();
+            var artistsByGenre = AlbumsContext.Genre.Where(p => p.name == genre).First().Artists.ToList();
+
+            return View(artistsByGenre);
         }
+
+
 
     }
 }
