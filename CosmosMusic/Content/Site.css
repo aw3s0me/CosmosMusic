@@ -8,7 +8,7 @@
 body
 {
     height: 100%;
-    background-color: blueviolet; 
+    background-color: gray; 
     font-size: 10pt;
     line-height: 1.6em;
 }
@@ -18,9 +18,80 @@ body
     position: relative;
     min-height: 100%;
     width: 950px;
+    min-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: black;
+    padding-top: -16px;
 }
+
 
 #header
 {
     width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+}
+
+#banner
+{
+    width: 950px;
+}
+
+#hormenu
+{
+    height: 10%;
+}
+
+#hormenu ul
+{
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+#hormenu ul li
+{
+    display: inline;
+}
+
+#hormenu ul li a
+{
+    background-color: black;
+    float: left;
+    padding: 5px 20px;
+    text-decoration: none;
+    color: #fff;
+
+}
+#hormenu ul li a:visited
+{
+    background-color: black;
+    float: left;
+    padding: 5px 20px;
+    text-decoration: none;
+    color: #fff;
+
+}
+
+#hormenu ul li a:hover
+{
+    background-color: black;
+    float: left;
+    padding: 5px 20px;
+    text-decoration: none;
+    color: #fff;
+
+}
+#content
+{
+    height: 70%;
+}
+
+
+
+#footer
+{
+    height: 10%;
 }

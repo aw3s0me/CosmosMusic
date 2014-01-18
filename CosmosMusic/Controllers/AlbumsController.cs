@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace CosmosMusic2.Controllers
 {
-    public class AlbumController : Controller
+    public class AlbumsController : Controller
     {
         //
         // GET: /Album/
