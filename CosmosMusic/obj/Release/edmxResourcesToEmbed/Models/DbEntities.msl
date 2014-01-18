@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="korovin_idzModelStoreContainer" CdmEntityContainer="korovin_idzEntities">
+    <EntitySetMapping Name="Albums">
+      <EntityTypeMapping TypeName="korovin_idzModel.Albums">
+        <MappingFragment StoreEntitySet="Albums">
+          <ScalarProperty Name="album_id" ColumnName="album_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="add_date" ColumnName="add_date" />
+          <ScalarProperty Name="rating" ColumnName="rating" />
+          <ScalarProperty Name="cover" ColumnName="cover" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="year" ColumnName="year" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Artists">
+      <EntityTypeMapping TypeName="korovin_idzModel.Artists">
+        <MappingFragment StoreEntitySet="Artists">
+          <ScalarProperty Name="artist_id" ColumnName="artist_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="image" ColumnName="image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Country">
+      <EntityTypeMapping TypeName="korovin_idzModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="id_country" ColumnName="id_country" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genre">
+      <EntityTypeMapping TypeName="korovin_idzModel.Genre">
+        <MappingFragment StoreEntitySet="Genre">
+          <ScalarProperty Name="id_genre" ColumnName="id_genre" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="History">
+      <EntityTypeMapping TypeName="korovin_idzModel.History">
+        <MappingFragment StoreEntitySet="History">
+          <ScalarProperty Name="history_id" ColumnName="history_id" />
+          <ScalarProperty Name="listening_time" ColumnName="listening_time" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="song_id" ColumnName="song_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="korovin_idzModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="id_role" ColumnName="id_role" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Song">
+      <EntityTypeMapping TypeName="korovin_idzModel.Song">
+        <MappingFragment StoreEntitySet="Song">
+          <ScalarProperty Name="song_id" ColumnName="song_id" />
+          <ScalarProperty Name="song_path" ColumnName="song_path" />
+          <ScalarProperty Name="album_id" ColumnName="album_id" />
+          <ScalarProperty Name="song_name" ColumnName="song_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="korovin_idzModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="korovin_idzModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="id_role" ColumnName="id_role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Artists_Song" TypeName="korovin_idzModel.Artists_Song" StoreEntitySet="Artists_Song">
+      <EndProperty Name="Artists">
+        <ScalarProperty Name="artist_id" ColumnName="artist_id" />
+      </EndProperty>
+      <EndProperty Name="Song">
+        <ScalarProperty Name="song_id" ColumnName="song_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Country_Artists" TypeName="korovin_idzModel.Country_Artists" StoreEntitySet="Country_Artists">
+      <EndProperty Name="Artists">
+        <ScalarProperty Name="artist_id" ColumnName="artist_id" />
+      </EndProperty>
+      <EndProperty Name="Country">
+        <ScalarProperty Name="id_country" ColumnName="id_country" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Country_Users" TypeName="korovin_idzModel.Country_Users" StoreEntitySet="Country_Users">
+      <EndProperty Name="Country">
+        <ScalarProperty Name="id_country" ColumnName="id_country" />
+      </EndProperty>
+      <EndProperty Name="Users">
+        <ScalarProperty Name="user_id" ColumnName="user_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Favorite_Artists" TypeName="korovin_idzModel.Favorite_Artists" StoreEntitySet="Favorite_Artists">
+      <EndProperty Name="Artists">
+        <ScalarProperty Name="artist_id" ColumnName="artist_id" />
+      </EndProperty>
+      <EndProperty Name="Users">
+        <ScalarProperty Name="user_id" ColumnName="user_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Genre_Artists" TypeName="korovin_idzModel.Genre_Artists" StoreEntitySet="Genre_Artists">
+      <EndProperty Name="Artists">
+        <ScalarProperty Name="artist_id" ColumnName="artist_id" />
+      </EndProperty>
+      <EndProperty Name="Genre">
+        <ScalarProperty Name="id_genre" ColumnName="id_genre" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="korovin_idzModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="korovin_idzModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="korovin_idzModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="korovin_idzModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="korovin_idzModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="korovin_idzModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="korovin_idzModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="korovin_idzModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="korovin_idzModel.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>

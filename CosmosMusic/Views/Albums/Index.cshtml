@@ -1,5 +1,13 @@
-﻿@{
+﻿@model IEnumerable<CosmosMusic.Models.Genre>
+
+@{
     ViewBag.Title = "Albums index";
 }
 
 <h2 style="color: white">Albums index</h2>
+<br />
+
+@foreach (var genre in Model)
+{
+    <li>@Html.ActionLink(genre.name, "Browse", new {genre = genre.name})</li>
+}

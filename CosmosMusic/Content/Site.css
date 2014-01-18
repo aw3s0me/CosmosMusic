@@ -32,6 +32,7 @@ body
     margin-left: auto;
     margin-right: auto;
     height: auto;
+    position: relative;
 }
 
 #banner
@@ -42,6 +43,7 @@ body
 #hormenu
 {
     height: 10%;
+    width: 950px;
 }
 
 #hormenu ul
@@ -87,6 +89,8 @@ body
 #content
 {
     height: 70%;
+    width: 950px;
+    background-color: white;
 }
 
 
@@ -94,4 +98,5 @@ body
 #footer
 {
     height: 10%;
+    width: 950px;
 }

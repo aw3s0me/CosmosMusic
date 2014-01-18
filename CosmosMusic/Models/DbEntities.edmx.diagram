@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="85dcf89b4df246febf52972b060cb3a8" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="korovin_idzModel.Albums" Width="1.5" PointX="7.5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="korovin_idzModel.Artists" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="korovin_idzModel.Country" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="korovin_idzModel.Genre" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="korovin_idzModel.History" Width="1.5" PointX="7.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="korovin_idzModel.Role" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="korovin_idzModel.Song" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="korovin_idzModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="korovin_idzModel.Users" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="korovin_idzModel.added_user" ManuallyRouted="false" />
+        <AssociationConnector Association="korovin_idzModel.songs_in_album" ManuallyRouted="false" />
+        <AssociationConnector Association="korovin_idzModel.history_of_user" ManuallyRouted="false" />
+        <AssociationConnector Association="korovin_idzModel.songs_in_history" ManuallyRouted="false" />
+        <AssociationConnector Association="korovin_idzModel.rights" ManuallyRouted="false" />
+        <AssociationConnector Association="korovin_idzModel.Artists_Song" ManuallyRouted="false" />
+        <AssociationConnector Association="korovin_idzModel.Country_Artists" ManuallyRouted="false" />
+        <AssociationConnector Association="korovin_idzModel.Country_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="korovin_idzModel.Favorite_Artists" ManuallyRouted="false" />
+        <AssociationConnector Association="korovin_idzModel.Genre_Artists" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

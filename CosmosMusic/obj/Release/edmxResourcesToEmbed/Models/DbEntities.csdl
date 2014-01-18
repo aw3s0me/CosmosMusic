@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="korovin_idzModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="korovin_idzEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Albums" EntityType="korovin_idzModel.Albums" />
+    <EntitySet Name="Artists" EntityType="korovin_idzModel.Artists" />
+    <EntitySet Name="Country" EntityType="korovin_idzModel.Country" />
+    <EntitySet Name="Genre" EntityType="korovin_idzModel.Genre" />
+    <EntitySet Name="History" EntityType="korovin_idzModel.History" />
+    <EntitySet Name="Role" EntityType="korovin_idzModel.Role" />
+    <EntitySet Name="Song" EntityType="korovin_idzModel.Song" />
+    <EntitySet Name="sysdiagrams" EntityType="korovin_idzModel.sysdiagrams" />
+    <EntitySet Name="Users" EntityType="korovin_idzModel.Users" />
+    <AssociationSet Name="added_user" Association="korovin_idzModel.added_user">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Albums" EntitySet="Albums" />
+    </AssociationSet>
+    <AssociationSet Name="songs_in_album" Association="korovin_idzModel.songs_in_album">
+      <End Role="Albums" EntitySet="Albums" />
+      <End Role="Song" EntitySet="Song" />
+    </AssociationSet>
+    <AssociationSet Name="history_of_user" Association="korovin_idzModel.history_of_user">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="History" EntitySet="History" />
+    </AssociationSet>
+    <AssociationSet Name="songs_in_history" Association="korovin_idzModel.songs_in_history">
+      <End Role="Song" EntitySet="Song" />
+      <End Role="History" EntitySet="History" />
+    </AssociationSet>
+    <AssociationSet Name="rights" Association="korovin_idzModel.rights">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="Artists_Song" Association="korovin_idzModel.Artists_Song">
+      <End Role="Artists" EntitySet="Artists" />
+      <End Role="Song" EntitySet="Song" />
+    </AssociationSet>
+    <AssociationSet Name="Country_Artists" Association="korovin_idzModel.Country_Artists">
+      <End Role="Artists" EntitySet="Artists" />
+      <End Role="Country" EntitySet="Country" />
+    </AssociationSet>
+    <AssociationSet Name="Country_Users" Association="korovin_idzModel.Country_Users">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="Favorite_Artists" Association="korovin_idzModel.Favorite_Artists">
+      <End Role="Artists" EntitySet="Artists" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="Genre_Artists" Association="korovin_idzModel.Genre_Artists">
+      <End Role="Artists" EntitySet="Artists" />
+      <End Role="Genre" EntitySet="Genre" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(korovin_idzModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(korovin_idzModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <EntityType Name="Albums">
+    <Key>
+      <PropertyRef Name="album_id" />
+    </Key>
+    <Property Name="album_id" Type="Guid" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="add_date" Type="DateTime" Precision="3" />
+    <Property Name="rating" Type="Int32" />
+    <Property Name="cover" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="user_id" Type="Guid" Nullable="false" />
+    <Property Name="year" Type="Int32" />
+    <NavigationProperty Name="Users" Relationship="korovin_idzModel.added_user" FromRole="Albums" ToRole="Users" />
+    <NavigationProperty Name="Song" Relationship="korovin_idzModel.songs_in_album" FromRole="Albums" ToRole="Song" />
+  </EntityType>
+  <EntityType Name="Artists">
+    <Key>
+      <PropertyRef Name="artist_id" />
+    </Key>
+    <Property Name="artist_id" Type="Guid" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="image" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Song" Relationship="korovin_idzModel.Artists_Song" FromRole="Artists" ToRole="Song" />
+    <NavigationProperty Name="Country" Relationship="korovin_idzModel.Country_Artists" FromRole="Artists" ToRole="Country" />
+    <NavigationProperty Name="Users" Relationship="korovin_idzModel.Favorite_Artists" FromRole="Artists" ToRole="Users" />
+    <NavigationProperty Name="Genre" Relationship="korovin_idzModel.Genre_Artists" FromRole="Artists" ToRole="Genre" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="id_country" />
+    </Key>
+    <Property Name="id_country" Type="Guid" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Artists" Relationship="korovin_idzModel.Country_Artists" FromRole="Country" ToRole="Artists" />
+    <NavigationProperty Name="Users" Relationship="korovin_idzModel.Country_Users" FromRole="Country" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="id_genre" />
+    </Key>
+    <Property Name="id_genre" Type="Guid" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Artists" Relationship="korovin_idzModel.Genre_Artists" FromRole="Genre" ToRole="Artists" />
+  </EntityType>
+  <EntityType Name="History">
+    <Key>
+      <PropertyRef Name="history_id" />
+    </Key>
+    <Property Name="history_id" Type="Guid" Nullable="false" />
+    <Property Name="listening_time" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="user_id" Type="Guid" Nullable="false" />
+    <Property Name="song_id" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="korovin_idzModel.history_of_user" FromRole="History" ToRole="Users" />
+    <NavigationProperty Name="Song" Relationship="korovin_idzModel.songs_in_history" FromRole="History" ToRole="Song" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="id_role" />
+    </Key>
+    <Property Name="id_role" Type="Guid" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Users" Relationship="korovin_idzModel.rights" FromRole="Role" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Song">
+    <Key>
+      <PropertyRef Name="song_id" />
+    </Key>
+    <Property Name="song_id" Type="Guid" Nullable="false" />
+    <Property Name="song_path" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="album_id" Type="Guid" Nullable="false" />
+    <Property Name="song_name" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Albums" Relationship="korovin_idzModel.songs_in_album" FromRole="Song" ToRole="Albums" />
+    <NavigationProperty Name="History" Relationship="korovin_idzModel.songs_in_history" FromRole="Song" ToRole="History" />
+    <NavigationProperty Name="Artists" Relationship="korovin_idzModel.Artists_Song" FromRole="Song" ToRole="Artists" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="Guid" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="birth_date" Type="DateTime" Precision="3" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="id_role" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Albums" Relationship="korovin_idzModel.added_user" FromRole="Users" ToRole="Albums" />
+    <NavigationProperty Name="History" Relationship="korovin_idzModel.history_of_user" FromRole="Users" ToRole="History" />
+    <NavigationProperty Name="Role" Relationship="korovin_idzModel.rights" FromRole="Users" ToRole="Role" />
+    <NavigationProperty Name="Country" Relationship="korovin_idzModel.Country_Users" FromRole="Users" ToRole="Country" />
+    <NavigationProperty Name="Artists" Relationship="korovin_idzModel.Favorite_Artists" FromRole="Users" ToRole="Artists" />
+  </EntityType>
+  <Association Name="added_user">
+    <End Role="Users" Type="korovin_idzModel.Users" Multiplicity="1" />
+    <End Role="Albums" Type="korovin_idzModel.Albums" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Albums">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="songs_in_album">
+    <End Role="Albums" Type="korovin_idzModel.Albums" Multiplicity="1" />
+    <End Role="Song" Type="korovin_idzModel.Song" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Albums">
+        <PropertyRef Name="album_id" />
+      </Principal>
+      <Dependent Role="Song">
+        <PropertyRef Name="album_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="history_of_user">
+    <End Role="Users" Type="korovin_idzModel.Users" Multiplicity="1" />
+    <End Role="History" Type="korovin_idzModel.History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="History">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="songs_in_history">
+    <End Role="Song" Type="korovin_idzModel.Song" Multiplicity="1" />
+    <End Role="History" Type="korovin_idzModel.History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Song">
+        <PropertyRef Name="song_id" />
+      </Principal>
+      <Dependent Role="History">
+        <PropertyRef Name="song_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="rights">
+    <End Role="Role" Type="korovin_idzModel.Role" Multiplicity="1" />
+    <End Role="Users" Type="korovin_idzModel.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="id_role" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="id_role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Artists_Song">
+    <End Role="Artists" Type="korovin_idzModel.Artists" Multiplicity="*" />
+    <End Role="Song" Type="korovin_idzModel.Song" Multiplicity="*" />
+  </Association>
+  <Association Name="Country_Artists">
+    <End Role="Artists" Type="korovin_idzModel.Artists" Multiplicity="*" />
+    <End Role="Country" Type="korovin_idzModel.Country" Multiplicity="*" />
+  </Association>
+  <Association Name="Country_Users">
+    <End Role="Country" Type="korovin_idzModel.Country" Multiplicity="*" />
+    <End Role="Users" Type="korovin_idzModel.Users" Multiplicity="*" />
+  </Association>
+  <Association Name="Favorite_Artists">
+    <End Role="Artists" Type="korovin_idzModel.Artists" Multiplicity="*" />
+    <End Role="Users" Type="korovin_idzModel.Users" Multiplicity="*" />
+  </Association>
+  <Association Name="Genre_Artists">
+    <End Role="Artists" Type="korovin_idzModel.Artists" Multiplicity="*" />
+    <End Role="Genre" Type="korovin_idzModel.Genre" Multiplicity="*" />
+  </Association>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="korovin_idzModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="korovin_idzModelStoreContainer">
+    <EntitySet Name="Albums" EntityType="korovin_idzModel.Store.Albums" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Artists" EntityType="korovin_idzModel.Store.Artists" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Artists_Song" EntityType="korovin_idzModel.Store.Artists_Song" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Country" EntityType="korovin_idzModel.Store.Country" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Country_Artists" EntityType="korovin_idzModel.Store.Country_Artists" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Country_Users" EntityType="korovin_idzModel.Store.Country_Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Favorite_Artists" EntityType="korovin_idzModel.Store.Favorite_Artists" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Genre" EntityType="korovin_idzModel.Store.Genre" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Genre_Artists" EntityType="korovin_idzModel.Store.Genre_Artists" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="History" EntityType="korovin_idzModel.Store.History" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Role" EntityType="korovin_idzModel.Store.Role" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Song" EntityType="korovin_idzModel.Store.Song" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="korovin_idzModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="korovin_idzModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="added user" Association="korovin_idzModel.Store.added user">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Albums" EntitySet="Albums" />
+    </AssociationSet>
+    <AssociationSet Name="country-artists_Artists" Association="korovin_idzModel.Store.country-artists_Artists">
+      <End Role="Artists" EntitySet="Artists" />
+      <End Role="Country_Artists" EntitySet="Country_Artists" />
+    </AssociationSet>
+    <AssociationSet Name="country-artists_Country" Association="korovin_idzModel.Store.country-artists_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Country_Artists" EntitySet="Country_Artists" />
+    </AssociationSet>
+    <AssociationSet Name="country-user_Country" Association="korovin_idzModel.Store.country-user_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Country_Users" EntitySet="Country_Users" />
+    </AssociationSet>
+    <AssociationSet Name="favourite albums_Artists" Association="korovin_idzModel.Store.favourite albums_Artists">
+      <End Role="Artists" EntitySet="Artists" />
+      <End Role="Favorite_Artists" EntitySet="Favorite_Artists" />
+    </AssociationSet>
+    <AssociationSet Name="favourite albums_Users" Association="korovin_idzModel.Store.favourite albums_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Favorite_Artists" EntitySet="Favorite_Artists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_REF" Association="korovin_idzModel.Store.FK_REF">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Country_Users" EntitySet="Country_Users" />
+    </AssociationSet>
+    <AssociationSet Name="genre-artists_Artists" Association="korovin_idzModel.Store.genre-artists_Artists">
+      <End Role="Artists" EntitySet="Artists" />
+      <End Role="Genre_Artists" EntitySet="Genre_Artists" />
+    </AssociationSet>
+    <AssociationSet Name="genre-artists_Genre" Association="korovin_idzModel.Store.genre-artists_Genre">
+      <End Role="Genre" EntitySet="Genre" />
+      <End Role="Genre_Artists" EntitySet="Genre_Artists" />
+    </AssociationSet>
+    <AssociationSet Name="history of user" Association="korovin_idzModel.Store.history of user">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="History" EntitySet="History" />
+    </AssociationSet>
+    <AssociationSet Name="rights" Association="korovin_idzModel.Store.rights">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="song-artist_Artists" Association="korovin_idzModel.Store.song-artist_Artists">
+      <End Role="Artists" EntitySet="Artists" />
+      <End Role="Artists_Song" EntitySet="Artists_Song" />
+    </AssociationSet>
+    <AssociationSet Name="song-artist_Song" Association="korovin_idzModel.Store.song-artist_Song">
+      <End Role="Song" EntitySet="Song" />
+      <End Role="Artists_Song" EntitySet="Artists_Song" />
+    </AssociationSet>
+    <AssociationSet Name="songs in album" Association="korovin_idzModel.Store.songs in album">
+      <End Role="Albums" EntitySet="Albums" />
+      <End Role="Song" EntitySet="Song" />
+    </AssociationSet>
+    <AssociationSet Name="songs in history" Association="korovin_idzModel.Store.songs in history">
+      <End Role="Song" EntitySet="Song" />
+      <End Role="History" EntitySet="History" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Albums">
+    <Key>
+      <PropertyRef Name="album_id" />
+    </Key>
+    <Property Name="album_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="add_date" Type="datetime" />
+    <Property Name="rating" Type="int" />
+    <Property Name="cover" Type="varchar" MaxLength="200" />
+    <Property Name="user_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="year" Type="int" />
+  </EntityType>
+  <EntityType Name="Artists">
+    <Key>
+      <PropertyRef Name="artist_id" />
+    </Key>
+    <Property Name="artist_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="image" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Artists_Song">
+    <Key>
+      <PropertyRef Name="artist_id" />
+      <PropertyRef Name="song_id" />
+    </Key>
+    <Property Name="artist_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="song_id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="id_country" />
+    </Key>
+    <Property Name="id_country" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Country_Artists">
+    <Key>
+      <PropertyRef Name="id_country" />
+      <PropertyRef Name="artist_id" />
+    </Key>
+    <Property Name="id_country" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="artist_id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Country_Users">
+    <Key>
+      <PropertyRef Name="id_country" />
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="id_country" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="user_id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Favorite_Artists">
+    <Key>
+      <PropertyRef Name="artist_id" />
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="artist_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="user_id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="id_genre" />
+    </Key>
+    <Property Name="id_genre" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Genre_Artists">
+    <Key>
+      <PropertyRef Name="id_genre" />
+      <PropertyRef Name="artist_id" />
+    </Key>
+    <Property Name="id_genre" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="artist_id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="History">
+    <Key>
+      <PropertyRef Name="history_id" />
+    </Key>
+    <Property Name="history_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="listening_time" Type="datetime" Nullable="false" />
+    <Property Name="user_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="song_id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="id_role" />
+    </Key>
+    <Property Name="id_role" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Song">
+    <Key>
+      <PropertyRef Name="song_id" />
+    </Key>
+    <Property Name="song_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="song_path" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="album_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="song_name" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="150" />
+    <Property Name="birth_date" Type="datetime" />
+    <Property Name="username" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="password" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="id_role" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <Association Name="added user">
+    <End Role="Users" Type="korovin_idzModel.Store.Users" Multiplicity="1" />
+    <End Role="Albums" Type="korovin_idzModel.Store.Albums" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Albums">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="country-artists_Artists">
+    <End Role="Artists" Type="korovin_idzModel.Store.Artists" Multiplicity="1" />
+    <End Role="Country_Artists" Type="korovin_idzModel.Store.Country_Artists" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artists">
+        <PropertyRef Name="artist_id" />
+      </Principal>
+      <Dependent Role="Country_Artists">
+        <PropertyRef Name="artist_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="country-artists_Country">
+    <End Role="Country" Type="korovin_idzModel.Store.Country" Multiplicity="1" />
+    <End Role="Country_Artists" Type="korovin_idzModel.Store.Country_Artists" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="id_country" />
+      </Principal>
+      <Dependent Role="Country_Artists">
+        <PropertyRef Name="id_country" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="country-user_Country">
+    <End Role="Country" Type="korovin_idzModel.Store.Country" Multiplicity="1" />
+    <End Role="Country_Users" Type="korovin_idzModel.Store.Country_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="id_country" />
+      </Principal>
+      <Dependent Role="Country_Users">
+        <PropertyRef Name="id_country" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="favourite albums_Artists">
+    <End Role="Artists" Type="korovin_idzModel.Store.Artists" Multiplicity="1" />
+    <End Role="Favorite_Artists" Type="korovin_idzModel.Store.Favorite_Artists" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artists">
+        <PropertyRef Name="artist_id" />
+      </Principal>
+      <Dependent Role="Favorite_Artists">
+        <PropertyRef Name="artist_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="favourite albums_Users">
+    <End Role="Users" Type="korovin_idzModel.Store.Users" Multiplicity="1" />
+    <End Role="Favorite_Artists" Type="korovin_idzModel.Store.Favorite_Artists" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Favorite_Artists">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_REF">
+    <End Role="Users" Type="korovin_idzModel.Store.Users" Multiplicity="1" />
+    <End Role="Country_Users" Type="korovin_idzModel.Store.Country_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Country_Users">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="genre-artists_Artists">
+    <End Role="Artists" Type="korovin_idzModel.Store.Artists" Multiplicity="1" />
+    <End Role="Genre_Artists" Type="korovin_idzModel.Store.Genre_Artists" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artists">
+        <PropertyRef Name="artist_id" />
+      </Principal>
+      <Dependent Role="Genre_Artists">
+        <PropertyRef Name="artist_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="genre-artists_Genre">
+    <End Role="Genre" Type="korovin_idzModel.Store.Genre" Multiplicity="1" />
+    <End Role="Genre_Artists" Type="korovin_idzModel.Store.Genre_Artists" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genre">
+        <PropertyRef Name="id_genre" />
+      </Principal>
+      <Dependent Role="Genre_Artists">
+        <PropertyRef Name="id_genre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="history of user">
+    <End Role="Users" Type="korovin_idzModel.Store.Users" Multiplicity="1" />
+    <End Role="History" Type="korovin_idzModel.Store.History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="History">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="rights">
+    <End Role="Role" Type="korovin_idzModel.Store.Role" Multiplicity="1" />
+    <End Role="Users" Type="korovin_idzModel.Store.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="id_role" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="id_role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="song-artist_Artists">
+    <End Role="Artists" Type="korovin_idzModel.Store.Artists" Multiplicity="1" />
+    <End Role="Artists_Song" Type="korovin_idzModel.Store.Artists_Song" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artists">
+        <PropertyRef Name="artist_id" />
+      </Principal>
+      <Dependent Role="Artists_Song">
+        <PropertyRef Name="artist_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="song-artist_Song">
+    <End Role="Song" Type="korovin_idzModel.Store.Song" Multiplicity="1" />
+    <End Role="Artists_Song" Type="korovin_idzModel.Store.Artists_Song" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Song">
+        <PropertyRef Name="song_id" />
+      </Principal>
+      <Dependent Role="Artists_Song">
+        <PropertyRef Name="song_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="songs in album">
+    <End Role="Albums" Type="korovin_idzModel.Store.Albums" Multiplicity="1" />
+    <End Role="Song" Type="korovin_idzModel.Store.Song" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Albums">
+        <PropertyRef Name="album_id" />
+      </Principal>
+      <Dependent Role="Song">
+        <PropertyRef Name="album_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="songs in history">
+    <End Role="Song" Type="korovin_idzModel.Store.Song" Multiplicity="1" />
+    <End Role="History" Type="korovin_idzModel.Store.History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Song">
+        <PropertyRef Name="song_id" />
+      </Principal>
+      <Dependent Role="History">
+        <PropertyRef Name="song_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <!--Errors Found During Generation:
+      warning 6005: The function 'add_album' has a parameter 'TVP' at parameter index 0 that has a data type 'table type' which is currently not supported for the target .NET Framework version. The function was excluded.
+      
+      <Function Name="add_album" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Parameter Name="album_name" Type="varchar" Mode="In" />
+        <Parameter Name="year" Type="int" Mode="In" />
+        <Parameter Name="add_date" Type="datetime" Mode="In" />
+        <Parameter Name="rating" Type="int" Mode="In" />
+        <Parameter Name="cover" Type="varchar" Mode="In" />
+        <Parameter Name="add_username" Type="varchar" Mode="In" />
+      </Function>-->
+</Schema>
