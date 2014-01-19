@@ -1,0 +1,14 @@
+﻿@model IEnumerable<CosmosMusic.Models.Albums>
+
+@{
+    ViewBag.Title = "Browse Albums";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color: black">Browsing Artist: @Request.Params["genre"]</h2>
+<br />
+
+@foreach (var album in Model)
+{
+    <li>@Html.ActionLink(album.name, "AlbumDetail", new { @id = album.album_id.ToString} )</li>
+}

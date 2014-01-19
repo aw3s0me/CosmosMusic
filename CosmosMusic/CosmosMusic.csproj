@@ -118,7 +118,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\AlbumsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\MusicController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -218,9 +219,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Albums\Index.cshtml" />
+    <Content Include="Views\Music\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\Albums\Browse.cshtml" />
+    <Content Include="Views\Music\Browse.cshtml" />
+    <Content Include="Views\Music\Albums.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Music\AlbumDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
