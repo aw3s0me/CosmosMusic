@@ -10,5 +10,6 @@
 
 @foreach (var album in Model)
 {
-    <li>@Html.ActionLink(album.name, "AlbumDetail", new { @id = album.album_id.ToString} )</li>
+    <!--<li>Html.ActionLink(album.name, "AlbumDetail", new { id = album.album_id.ToString} )</li> -->
+    <li><a href="@Url.Action("AlbumDetail","Music", new { @id = album.album_id.ToString()} )">@album.name</a></li>
 }

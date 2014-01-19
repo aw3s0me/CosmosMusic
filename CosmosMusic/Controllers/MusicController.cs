@@ -49,22 +49,21 @@ namespace CosmosMusic2.Controllers
 
         public ActionResult Albums(string id)
         {
-            Guid AlbumGuid = Guid.Empty;
+            Guid ArtistGuid = Guid.Empty;
             try
             {
-                AlbumGuid = new Guid(id);
+                ArtistGuid = new Guid(id);
             }
             catch (Exception ex)
             {
 
             }
 
-            var songsFound = AlbumsContext.Artists.Find(AlbumGuid).Song;
-            //var albums = songsFound.ToList().GroupBy(p => p.Albums);
-            /*var albums = from s in AlbumsContext.Artists
-                         join m in AlbumsContext.Song on s.artist_id equals m. */
-            //var albums = songsFound.To
-            var albums = from u in AlbumsContext.A
+            var artist = AlbumsContext.Artists.Find(ArtistGuid);
+            var albums = (from s in AlbumsContext.Song
+                        from c in s.Artists
+                        where c.artist_id == artist.artist_id
+                        select s.Albums).Distinct().ToList();
 
             return View(albums);
         }
