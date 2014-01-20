@@ -1,0 +1,68 @@
+﻿@model CosmosMusic.Models.Albums
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Albums</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.album_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.album_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.add_date)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.add_date)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.rating)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.rating)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.cover)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.cover)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Users.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Users.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.year)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.year)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

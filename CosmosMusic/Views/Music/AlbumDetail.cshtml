@@ -1,8 +1,15 @@
-﻿
+﻿@model CosmosMusic.Models.Albums
 
 @{
-    ViewBag.Title = "AlbumDetail";
+    ViewBag.Title = "Details of album: " + "\"" + @Model.name + "\"";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>AlbumDetail</h2>
+@{
+    <img class="artistImg" src="@Model.cover" alt="" />
+    <h5>Стиль: @Model.</h5>
+    <h5></h5>
+    <h5></h5>
+}
+

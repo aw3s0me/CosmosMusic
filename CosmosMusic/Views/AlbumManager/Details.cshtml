@@ -1,0 +1,64 @@
+﻿@model CosmosMusic.Models.Albums
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Albums</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.album_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.album_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.add_date)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.add_date)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.rating)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.rating)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.cover)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.cover)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Users.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Users.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.year)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.year)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

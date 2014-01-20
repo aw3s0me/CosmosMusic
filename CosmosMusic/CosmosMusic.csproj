@@ -39,7 +39,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
@@ -52,7 +53,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -118,6 +118,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AlbumManagerController.cs" />
+    <Compile Include="Controllers\ArtistManagerController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\MusicController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -174,6 +176,7 @@
       <DependentUpon>DbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\UserManagerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -225,6 +228,21 @@
     <Content Include="Views\Music\Albums.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Music\AlbumDetail.cshtml" />
+    <Content Include="Views\AlbumManager\Index.cshtml" />
+    <Content Include="Views\AlbumManager\Details.cshtml" />
+    <Content Include="Views\AlbumManager\Create.cshtml" />
+    <Content Include="Views\AlbumManager\Edit.cshtml" />
+    <Content Include="Views\AlbumManager\Delete.cshtml" />
+    <Content Include="Views\UserManager\Index.cshtml" />
+    <Content Include="Views\UserManager\Details.cshtml" />
+    <Content Include="Views\UserManager\Create.cshtml" />
+    <Content Include="Views\UserManager\Edit.cshtml" />
+    <Content Include="Views\UserManager\Delete.cshtml" />
+    <Content Include="Views\ArtistManager\Index.cshtml" />
+    <Content Include="Views\ArtistManager\Details.cshtml" />
+    <Content Include="Views\ArtistManager\Create.cshtml" />
+    <Content Include="Views\ArtistManager\Edit.cshtml" />
+    <Content Include="Views\ArtistManager\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
