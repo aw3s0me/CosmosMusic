@@ -24,9 +24,19 @@ namespace CosmosMusic.Controllers
         //
         // GET: /ArtistManager/Details/5
 
-        public ActionResult Details(Guid id = null)
+        public ActionResult Details(string id = null)
         {
-            Artists artists = db.Artists.Find(id);
+            Guid ArtistGuid = Guid.Empty;
+            try
+            {
+                ArtistGuid = new Guid(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            Artists artists = db.Artists.Find(ArtistGuid);
             if (artists == null)
             {
                 return HttpNotFound();
@@ -63,9 +73,20 @@ namespace CosmosMusic.Controllers
         //
         // GET: /ArtistManager/Edit/5
 
-        public ActionResult Edit(Guid id = null)
+        public ActionResult Edit(string id = null)
         {
-            Artists artists = db.Artists.Find(id);
+            Guid ArtistGuid = Guid.Empty;
+            try
+            {
+                ArtistGuid = new Guid(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            Artists artists = db.Artists.Find(ArtistGuid);
             if (artists == null)
             {
                 return HttpNotFound();
@@ -92,9 +113,20 @@ namespace CosmosMusic.Controllers
         //
         // GET: /ArtistManager/Delete/5
 
-        public ActionResult Delete(Guid id = null)
+        public ActionResult Delete(string id = null)
         {
-            Artists artists = db.Artists.Find(id);
+            Guid ArtistGuid = Guid.Empty;
+            try
+            {
+                ArtistGuid = new Guid(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            Artists artists = db.Artists.Find(ArtistGuid);
             if (artists == null)
             {
                 return HttpNotFound();
@@ -107,9 +139,19 @@ namespace CosmosMusic.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(Guid id)
+        public ActionResult DeleteConfirmed(string id)
         {
-            Artists artists = db.Artists.Find(id);
+            Guid ArtistGuid = Guid.Empty;
+            try
+            {
+                ArtistGuid = new Guid(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            Artists artists = db.Artists.Find(ArtistGuid);
             db.Artists.Remove(artists);
             db.SaveChanges();
             return RedirectToAction("Index");

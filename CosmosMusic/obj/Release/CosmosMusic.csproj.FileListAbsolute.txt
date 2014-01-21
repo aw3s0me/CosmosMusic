@@ -1,7 +1,7 @@
-C:\Work\CosmosMusic\CosmosMusic\obj\Release\CosmosMusic.csprojResolveAssemblyReference.cache
 C:\Work\CosmosMusic\CosmosMusic\bin\CosmosMusic.dll
 C:\Work\CosmosMusic\CosmosMusic\bin\CosmosMusic.pdb
 C:\Work\CosmosMusic\CosmosMusic\bin\EntityFramework.dll
+C:\Work\CosmosMusic\CosmosMusic\bin\EntityFramework.SqlServer.dll
 C:\Work\CosmosMusic\CosmosMusic\bin\Microsoft.Web.Infrastructure.dll
 C:\Work\CosmosMusic\CosmosMusic\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 C:\Work\CosmosMusic\CosmosMusic\bin\Newtonsoft.Json.dll
@@ -15,6 +15,7 @@ C:\Work\CosmosMusic\CosmosMusic\bin\System.Web.WebPages.Deployment.dll
 C:\Work\CosmosMusic\CosmosMusic\bin\System.Web.WebPages.dll
 C:\Work\CosmosMusic\CosmosMusic\bin\System.Web.WebPages.Razor.dll
 C:\Work\CosmosMusic\CosmosMusic\bin\EntityFramework.xml
+C:\Work\CosmosMusic\CosmosMusic\bin\EntityFramework.SqlServer.xml
 C:\Work\CosmosMusic\CosmosMusic\bin\Newtonsoft.Json.xml
 C:\Work\CosmosMusic\CosmosMusic\bin\System.Net.Http.Formatting.xml
 C:\Work\CosmosMusic\CosmosMusic\bin\System.Web.Helpers.xml
@@ -25,5 +26,8 @@ C:\Work\CosmosMusic\CosmosMusic\bin\System.Web.Razor.xml
 C:\Work\CosmosMusic\CosmosMusic\bin\System.Web.WebPages.xml
 C:\Work\CosmosMusic\CosmosMusic\bin\System.Web.WebPages.Deployment.xml
 C:\Work\CosmosMusic\CosmosMusic\bin\System.Web.WebPages.Razor.xml
+C:\Work\CosmosMusic\CosmosMusic\obj\Release\CosmosMusic.csprojResolveAssemblyReference.cache
 C:\Work\CosmosMusic\CosmosMusic\obj\Release\CosmosMusic.dll
 C:\Work\CosmosMusic\CosmosMusic\obj\Release\CosmosMusic.pdb
+C:\Work\CosmosMusic\CosmosMusic\obj\Release\CosmosMusic.Properties.Resources.resources
+C:\Work\CosmosMusic\CosmosMusic\obj\Release\CosmosMusic.csproj.GenerateResource.Cache

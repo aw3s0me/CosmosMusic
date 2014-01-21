@@ -25,9 +25,19 @@ namespace CosmosMusic.Controllers
         //
         // GET: /AlbumManager/Details/5
 
-        public ActionResult Details(Guid id = null)
+        public ActionResult Details(string id = null)
         {
-            Albums albums = db.Albums.Find(id);
+            Guid AlbumGuid = Guid.Empty;
+            try
+            {
+                AlbumGuid = new Guid(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            Albums albums = db.Albums.Find(AlbumGuid);
             if (albums == null)
             {
                 return HttpNotFound();
@@ -66,9 +76,19 @@ namespace CosmosMusic.Controllers
         //
         // GET: /AlbumManager/Edit/5
 
-        public ActionResult Edit(Guid id = null)
+        public ActionResult Edit(string id = null)
         {
-            Albums albums = db.Albums.Find(id);
+            Guid AlbumGuid = Guid.Empty;
+            try
+            {
+                AlbumGuid = new Guid(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            Albums albums = db.Albums.Find(AlbumGuid);
             if (albums == null)
             {
                 return HttpNotFound();
@@ -97,9 +117,19 @@ namespace CosmosMusic.Controllers
         //
         // GET: /AlbumManager/Delete/5
 
-        public ActionResult Delete(Guid id = null)
+        public ActionResult Delete(string id = null)
         {
-            Albums albums = db.Albums.Find(id);
+            Guid AlbumGuid = Guid.Empty;
+            try
+            {
+                AlbumGuid = new Guid(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            Albums albums = db.Albums.Find(AlbumGuid);
             if (albums == null)
             {
                 return HttpNotFound();
@@ -112,9 +142,19 @@ namespace CosmosMusic.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(Guid id)
+        public ActionResult DeleteConfirmed(string id)
         {
-            Albums albums = db.Albums.Find(id);
+            Guid AlbumGuid = Guid.Empty;
+            try
+            {
+                AlbumGuid = new Guid(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            Albums albums = db.Albums.Find(AlbumGuid);
             db.Albums.Remove(albums);
             db.SaveChanges();
             return RedirectToAction("Index");
