@@ -59,5 +59,14 @@ namespace CosmosMusic.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string d {
+            get {
+                return ResourceManager.GetString("d", resourceCulture);
+            }
+        }
     }
 }
