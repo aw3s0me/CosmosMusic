@@ -1,0 +1,25 @@
+﻿
+h1, h2, h3, h4, h5, h6
+{
+    color: black;
+    text-align: center;
+}
+
+.music
+{
+    /*background-color:rgba(255,0,0,0.5);*/
+    margin-left: auto;
+    margin-right: auto;
+    border-radius : 3px;
+    border: solid 2px black;
+    width: 60%;
+    height: auto;
+    text-align: center;
+    position: relative;
+    background-color: white;
+
+}
+
+.music li{
+    list-style: none;
+}

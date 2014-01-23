@@ -3,7 +3,7 @@
 <head>
     <title>@ViewBag.Title</title> 
     <meta charset="utf-8" /> 
-    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" /> 
+    <link href="@Url.Content("~/Content/Site1.css")" rel="stylesheet" type="text/css" /> 
     <script src="@Url.Content("~/Scripts/jquery-2.0.3.min.js")" type="text/javascript"></script>
 <!--    <script src="Url.Content("~/Scripts/modernizr-2.7.1.js")" type="text/javascript"></script> -->
 <!--    <script src="Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script> -->
@@ -16,7 +16,7 @@
         </div>
         <div id="hormenu">
             <ul>
-                <li><a href="/">Home</a></li>
+                <li><a href="/" >Home</a></li>
                 <li><a href="/Music/">Music</a></li>
                 <li><a href="/User/">User</a></li>
                 <li><a href="/ArtistManager/">User</a></li>
@@ -28,6 +28,8 @@
         <br />
         <div id="content">
             @RenderBody()
+           <br />
+            <br />
         </div>
         <div id="footer">
             &copy; @DateTime.Now.Year My Music Site

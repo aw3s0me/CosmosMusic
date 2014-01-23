@@ -5,11 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 style="color: black">Browsing Artist: @Request.Params["genre"]</h2>
-<br />
+<h2>Browsing Artist: @Request.Params["genre"]</h2>
 
+<div class="music_block">
+    <ul>
 @foreach (var album in Model)
 {
     <!--<li>Html.ActionLink(album.name, "AlbumDetail", new { id = album.album_id.ToString} )</li> -->
     <li><a href="@Url.Action("AlbumDetail","Music", new { @id = album.album_id.ToString()} )">@album.name</a></li>
 }
+        </ul>
+    </div>
+
+

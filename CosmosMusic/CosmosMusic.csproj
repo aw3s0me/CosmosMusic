@@ -201,7 +201,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\Images\banner.jpg" />
     <Content Include="Content\Images\default_cover.png" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\Music.css" />
+    <Content Include="Content\Site1.css" />
+    <Content Include="Content\Validation.css" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="Models\DbEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

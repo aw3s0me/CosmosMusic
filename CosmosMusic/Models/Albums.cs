@@ -21,7 +21,7 @@ namespace CosmosMusic.Models
         public Albums()
         {
             this.Song = new HashSet<Song>();
-            
+
             #region Artist_collection
 
             this.Artists = new HashSet<Artists>();
@@ -75,6 +75,7 @@ namespace CosmosMusic.Models
         [Required(ErrorMessage = "Username is required")]
         public System.Guid user_id { get; set; }
 
+        [DisplayName("Year")]
         [Required(ErrorMessage = "Year is required")]
         [Range(1900, 2015, ErrorMessage = "Year must be between 1900 and 2015")]
         public Nullable<int> year { get; set; }
