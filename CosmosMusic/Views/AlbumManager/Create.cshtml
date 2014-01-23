@@ -4,22 +4,26 @@
     ViewBag.Title = "Create";
 }
 
+<script src="@Url.Content("~/Scripts/jquery-2.0.3.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
 <h2>Create</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-
+    
     <fieldset>
         <legend>Albums</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.album_id)
+  <!--      <div class="editor-label">
+            Html.LabelFor(model => model.album_id)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.album_id, new { @Value = Guid.NewGuid()})
-            @Html.ValidationMessageFor(model => model.album_id)
-        </div>
+            Html.EditorFor(model => model.album_id )
+            Html.ValidationMessageFor(model => model.album_id)
+        </div> -->
 
         <div class="editor-label">
             @Html.LabelFor(model => model.name)
@@ -28,23 +32,23 @@
             @Html.EditorFor(model => model.name)
             @Html.ValidationMessageFor(model => model.name)
         </div>
-
+<!--
         <div class="editor-label">
-            @Html.LabelFor(model => model.add_date)
+            Html.LabelFor(model => model.add_date)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.add_date)
-            @Html.ValidationMessageFor(model => model.add_date)
+            Html.EditorFor(model => model.add_date)
+            Html.ValidationMessageFor(model => model.add_date)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.rating)
+-->
+<!--        <div class="editor-label">
+            Html.LabelFor(model => model.rating)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.rating)
-            @Html.ValidationMessageFor(model => model.rating)
+            Html.EditorFor(model => model.rating)
+            Html.ValidationMessageFor(model => model.rating)
         </div>
-
+-->
         <div class="editor-label">
             @Html.LabelFor(model => model.cover)
         </div>

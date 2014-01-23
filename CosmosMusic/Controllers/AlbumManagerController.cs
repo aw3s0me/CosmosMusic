@@ -64,12 +64,15 @@ namespace CosmosMusic.Controllers
             if (ModelState.IsValid)
             {
                 albums.album_id = Guid.NewGuid();
+                albums.add_date = DateTime.Now;
+                albums.rating = 0;
                 db.Albums.Add(albums);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.user_id = new SelectList(db.Users, "user_id", "name", albums.user_id);
+            
             return View(albums);
         }
 

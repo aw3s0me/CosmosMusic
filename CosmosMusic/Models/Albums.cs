@@ -49,17 +49,21 @@ namespace CosmosMusic.Models
 
         }
         [ScaffoldColumn(false)]
+        [Required(ErrorMessage = "Album id is required")]
         public System.Guid album_id { get; set; }
         
         [DisplayName("Album name")]
         [StringLength(50)]
+        [Required(ErrorMessage = "Album name is required")]
         public string name { get; set; }
 
         [DisplayName("Added at")]
+        [Required(ErrorMessage = "Add date is required")]
         public Nullable<System.DateTime> add_date { get; set; }
 
         [DisplayName("Rating")]
         [ScaffoldColumn(false)]
+        [Required(ErrorMessage = "Rating is required")]
         public Nullable<int> rating { get; set; }
 
         [DisplayName("Cover name")]
@@ -68,6 +72,7 @@ namespace CosmosMusic.Models
         public string cover { get; set; }
 
         [DisplayName("User added")]
+        [Required(ErrorMessage = "Username is required")]
         public System.Guid user_id { get; set; }
 
         [Required(ErrorMessage = "Year is required")]
