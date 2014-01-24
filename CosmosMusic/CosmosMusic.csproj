@@ -270,6 +270,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\ArtistImages\" />
+    <Folder Include="Content\Images\Covers\" />
     <Folder Include="Content\Themes\" />
   </ItemGroup>
   <ItemGroup>

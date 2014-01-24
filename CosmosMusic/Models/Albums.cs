@@ -86,5 +86,18 @@ namespace CosmosMusic.Models
         public virtual ICollection<Artists> Artists { get; set; }
         public virtual ICollection<Genre> Genres { get; set; }
         #endregion
+
+        #region funcs
+        public void GenreInit()
+        {
+            foreach (var artist in this.Artists)
+            {
+                foreach (var genre in artist.Genre)
+                {
+                    this.Genres.Add(genre);
+                }
+            }
+        }
+        #endregion
     }
 }

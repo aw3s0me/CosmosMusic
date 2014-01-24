@@ -80,8 +80,26 @@ namespace CosmosMusic2.Controllers
              
             }
 
+            var album = AlbumsContext.Albums.Find(AlbumGuid);
 
-            return View();
+            foreach (var sng in album.Song)
+            {
+                foreach (var artist in sng.Artists)
+                {
+                    album.Artists.Add(artist); //Should be unique
+                }
+            }
+            
+            foreach (var artist in album.Artists)
+            {
+                foreach (var genre in artist.Genre)
+                {
+                    album.Genres.Add(genre);
+                }
+            }
+
+
+            return View(album);
         }
 
     }

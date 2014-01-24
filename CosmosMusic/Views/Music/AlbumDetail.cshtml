@@ -7,9 +7,20 @@
 
 <h2>AlbumDetail</h2>
 @{
-    <img class="artistImg" src="@Model.cover" alt="" />
-    <h5>Стиль: @Model.</h5>
-    <h5></h5>
-    <h5></h5>
+    <div class="music">
+        <img class="artistImg" src="~\Content\Images\Covers\" + @Model.cover" alt="@Model.name" /> 
+        <h5>ID of album: @Model.album_id</h5>
+        <h5>Style: 
+            @foreach (var genre in Model.Genres) {
+                @Html.ActionLink(genre.name, "Browse", new {genre = genre.name}) 
+                @Html.Raw(" \\ ")
+            }
+
+        </h5>
+        <h5>Rating: @Model.rating</h5>
+        <h5>Added user: @Model.Users.name</h5>
+        <h5>Year: @Model.year</h5>
+        
+    </div>
 }
 
