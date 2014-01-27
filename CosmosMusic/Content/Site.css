@@ -127,6 +127,12 @@ body
 
 }
 
+.albumImg
+{
+    width : 200px;
+    height : 200px;
+}
+
 #content .music li{
     list-style: none;
 }

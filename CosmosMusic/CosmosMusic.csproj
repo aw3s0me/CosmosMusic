@@ -202,7 +202,7 @@
     <Content Include="Content\Images\banner.jpg" />
     <Content Include="Content\Images\default_cover.png" />
     <Content Include="Content\Music.css" />
-    <Content Include="Content\Site1.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\Validation.css" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="Models\DbEntities.edmx">
@@ -223,6 +223,8 @@
       <LastGenOutput>DbEntities.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
+    <Content Include="Scripts\Aw3_lightbox.js" />
+    <Content Include="Scripts\close.png" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

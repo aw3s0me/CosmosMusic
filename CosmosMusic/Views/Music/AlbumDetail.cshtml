@@ -4,15 +4,24 @@
     ViewBag.Title = "Details of album: " + "\"" + @Model.name + "\"";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!-- <script src="~/Scripts/jquery-2.1.0.min.js"></script> -->
+<script src="~/Scripts/Aw3_lightbox.js"></script>
 
 <h2>AlbumDetail</h2>
 @{
+    @Html.Raw("<script>$(document).ready(function() {");
+    @Html.Raw("$('.modal1').Aw3_lightbox({" + 
+        "content : '<img src=" + "\"\\Content\\Images\\Covers\\" + @Model.cover + "\" />'});")
+    @Html.Raw("});</script>");
+    
     <div class="music">
-        <img class="artistImg" src="~\Content\Images\Covers\" + @Model.cover" alt="@Model.name" /> 
+        <a href="#" class="modal1">
+            <img class="albumImg" src="\Content\Images\Covers\@Model.cover"/></a>
         <h5>ID of album: @Model.album_id</h5>
         <h5>Style: 
-            @foreach (var genre in Model.Genres) {
-                @Html.ActionLink(genre.name, "Browse", new {genre = genre.name}) 
+            @foreach (var genre in Model.Genres)
+            {
+                @Html.ActionLink(genre.name, "Browse", new { genre = genre.name }) 
                 @Html.Raw(" \\ ")
             }
 
@@ -20,7 +29,7 @@
         <h5>Rating: @Model.rating</h5>
         <h5>Added user: @Model.Users.name</h5>
         <h5>Year: @Model.year</h5>
-        
+
     </div>
 }
 
