@@ -4,14 +4,14 @@
     ViewBag.Title = "Details of album: " + "\"" + @Model.name + "\"";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<!-- <script src="~/Scripts/jquery-2.1.0.min.js"></script> -->
+
 <script src="~/Scripts/Aw3_lightbox.js"></script>
 
 <h2>AlbumDetail</h2>
 @{
     @Html.Raw("<script>$(document).ready(function() {");
     @Html.Raw("$('.modal1').Aw3_lightbox({" + 
-        "content : '<img src=" + "\"\\Content\\Images\\Covers\\" + @Model.cover + "\" />'});")
+        "content : '<img src=" + "\"/Content/Images/Covers/" + @Model.cover + "\" />'});")
     @Html.Raw("});</script>");
     
     <div class="music">

@@ -48,7 +48,7 @@
 				'display':'block',
 				'height':'50px',
 				'width':'50px',
-				'background': 'url(close.png) no-repeat',
+				'background': "url('/Scripts/close.png') no-repeat",
 			});
 
 			var pageHeight = $(document).height();
