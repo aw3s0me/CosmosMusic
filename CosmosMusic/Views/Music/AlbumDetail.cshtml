@@ -10,8 +10,8 @@
 <h2>AlbumDetail</h2>
 @{
     @Html.Raw("<script>$(document).ready(function() {");
-    @Html.Raw("$('.modal1').Aw3_lightbox({" + 
-        "content : '<img src=" + "\"/Content/Images/Covers/" + @Model.cover + "\" />'});")
+    @Html.Raw("$('.modal1').Aw3_lightbox({" +
+        "content : '<img src=" + "\"/Content/Images/Covers/" + @Model.cover + "\" />'});");
     @Html.Raw("});</script>");
     
     <div class="music">
@@ -24,7 +24,23 @@
                 @Html.ActionLink(genre.name, "Browse", new { genre = genre.name }) 
                 @Html.Raw(" \\ ")
             }
-
+        </h5>
+        <h5>
+            @if(Model.Artists.Count > 1) {
+                @Html.Raw("Artists: ");
+                foreach (var artist in Model.Artists) {
+                    @Html.ActionLink(artist.name, "Albums", new { artist = artist.artist_id.ToString()});
+                    @Html.Raw(" \\ ");
+                } 
+            }
+            else if(Model.Artists.Count == 1) {
+                @Html.Raw("Artist: ");
+               @* @Html.ActionLink(Model.Artists.FirstOrDefault().name, "Albums", new { artist = Model.Artists.FirstOrDefault().artist_id.ToString() }); *@
+                <a href="@Url.Action("Albums","Music", new { @id = Model.Artists.FirstOrDefault().artist_id.ToString()} )">@Model.Artists.FirstOrDefault().name</a>
+            }
+            else {
+                @Html.Raw("\\");
+            }
         </h5>
         <h5>Rating: @Model.rating</h5>
         <h5>Added user: @Model.Users.name</h5>
