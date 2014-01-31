@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="korovin_idzModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="korovin_idzModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="korovin_idzModelStoreContainer">
           <EntitySet Name="Albums" EntityType="korovin_idzModel.Store.Albums" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Artists" EntityType="korovin_idzModel.Store.Artists" store:Type="Tables" Schema="dbo" />
@@ -200,6 +200,8 @@
           <Property Name="username" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="password" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="id_role" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="email" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="isRemember" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="added user">
           <End Role="Users" Type="korovin_idzModel.Store.Users" Multiplicity="1" />
@@ -412,19 +414,7 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <!--Errors Found During Generation:
-      warning 6005: The function 'add_album' has a parameter 'TVP' at parameter index 0 that has a data type 'table type' which is currently not supported for the target .NET Framework version. The function was excluded.
-      
-      <Function Name="add_album" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-        <Parameter Name="album_name" Type="varchar" Mode="In" />
-        <Parameter Name="year" Type="int" Mode="In" />
-        <Parameter Name="add_date" Type="datetime" Mode="In" />
-        <Parameter Name="rating" Type="int" Mode="In" />
-        <Parameter Name="cover" Type="varchar" Mode="In" />
-        <Parameter Name="add_username" Type="varchar" Mode="In" />
-      </Function>-->
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="korovin_idzModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -608,6 +598,8 @@
           <NavigationProperty Name="Role" Relationship="korovin_idzModel.rights" FromRole="Users" ToRole="Role" />
           <NavigationProperty Name="Country" Relationship="korovin_idzModel.Country_Users" FromRole="Users" ToRole="Country" />
           <NavigationProperty Name="Artists" Relationship="korovin_idzModel.Favorite_Artists" FromRole="Users" ToRole="Artists" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="isRemember" Nullable="false" />
         </EntityType>
         <Association Name="added_user">
           <End Role="Users" Type="korovin_idzModel.Users" Multiplicity="1" />
@@ -786,6 +778,8 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="korovin_idzModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="isRemember" ColumnName="isRemember" />
+                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="birth_date" ColumnName="birth_date" />

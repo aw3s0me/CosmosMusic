@@ -28,6 +28,8 @@ namespace CosmosMusic.Models
         public string username { get; set; }
         public string password { get; set; }
         public System.Guid id_role { get; set; }
+        public string email { get; set; }
+        public bool isRemember { get; set; }
     
         public virtual ICollection<Albums> Albums { get; set; }
         public virtual ICollection<History> History { get; set; }
