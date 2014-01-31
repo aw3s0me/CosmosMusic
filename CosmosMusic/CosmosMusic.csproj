@@ -222,9 +222,20 @@
       <DependentUpon>DbEntities.edmx</DependentUpon>
       <LastGenOutput>DbEntities.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\jplayer\jPlayer_blue.monday_extd.psd" />
+    <Content Include="Scripts\jplayer\spirites_blue.monday_2011.psd" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\Aw3_lightbox.js" />
     <Content Include="Scripts\close.png" />
+    <Content Include="Scripts\jplayer\add-on\jplayer.playlist.min.js" />
+    <Content Include="Scripts\jplayer\add-on\jquery.jplayer.inspector.js" />
+    <Content Include="Scripts\jplayer\jplayer.blue.monday.css" />
+    <Content Include="Scripts\jplayer\jplayer.blue.monday.jpg" />
+    <Content Include="Scripts\jplayer\jplayer.blue.monday.seeking.gif" />
+    <Content Include="Scripts\jplayer\jplayer.blue.monday.video.play.png" />
+    <Content Include="Scripts\jplayer\Jplayer.swf" />
+    <Content Include="Scripts\jplayer\jquery.jplayer.min.js" />
+    <Content Include="Scripts\jplayer\popcorn\popcorn.jplayer.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
