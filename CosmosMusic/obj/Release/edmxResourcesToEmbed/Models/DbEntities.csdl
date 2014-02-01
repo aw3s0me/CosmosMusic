@@ -180,6 +180,8 @@
     <NavigationProperty Name="Role" Relationship="korovin_idzModel.rights" FromRole="Users" ToRole="Role" />
     <NavigationProperty Name="Country" Relationship="korovin_idzModel.Country_Users" FromRole="Users" ToRole="Country" />
     <NavigationProperty Name="Artists" Relationship="korovin_idzModel.Favorite_Artists" FromRole="Users" ToRole="Artists" />
+    <Property Type="String" Name="email" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="isRemember" Nullable="false" />
   </EntityType>
   <Association Name="added_user">
     <End Role="Users" Type="korovin_idzModel.Users" Multiplicity="1" />

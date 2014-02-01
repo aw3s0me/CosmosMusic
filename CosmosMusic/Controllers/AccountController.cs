@@ -26,11 +26,24 @@ namespace CosmosMusic.Controllers
         // POST: /Account/LogOn
 
         [HttpPost]
-        public ActionResult LogOn(LogOnModel model, string returnUrl)
+        public ActionResult LogOn(LogOnModel model/*, string returnUrl*/)
         {
             if (ModelState.IsValid)
             {
-                if (Membership.ValidateUser(model.UserName, model.Password))
+                var user = db.Users.Where(x => x.username == model.UserName && x.password == model.Password).FirstOrDefault();
+                user.isRemember = model.RememberMe;
+                db.SaveChanges();
+
+                if (user != null)
+                {
+                    ViewBag.UserName = model.UserName;
+                    FormsAuthentication.RedirectFromLoginPage(model.UserName, false); //HZ??!?
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                }
+                /*if (Membership.ValidateUser(model.UserName, model.Password))
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
@@ -46,7 +59,7 @@ namespace CosmosMusic.Controllers
                 else
                 {
                     ModelState.AddModelError("", "The user name or password provided is incorrect.");
-                }
+                } */
             }
 
             // If we got this far, something failed, redisplay form
@@ -80,18 +93,49 @@ namespace CosmosMusic.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
-                MembershipCreateStatus createStatus;
+
+                var user = db.Users.Where(x => x.email == model.Email).FirstOrDefault();
+                if (user != null)
+                {
+                    ModelState.AddModelError("", "The user with this email already exists.");
+                }
+                else
+                {
+                    user = null;
+                    user = db.Users.Where(x => x.username == model.UserName).FirstOrDefault();
+                    if (user != null)
+                    {
+                        ModelState.AddModelError("", "The user with this username already exists.");
+                    }
+                    else
+                    {
+                        var newuser = new Users();
+                        newuser.username = model.UserName;
+                        newuser.password = model.Password;
+                        newuser.user_id = Guid.NewGuid();
+                        newuser.isRemember = false;
+                        newuser.id_role = db.Role.Where( x=> x.name == "user").FirstOrDefault().id_role;
+                        newuser.email = model.Email;
+                        db.Users.Add(newuser);
+                        db.SaveChanges();
+                        //Place for authorize cookie ?
+
+                        return RedirectToAction("LogOn","Account");
+                    }
+
+                }
+               /* MembershipCreateStatus createStatus;
                 Membership.CreateUser(model.UserName, model.Password, model.Email, "question", "answer", true, null, out createStatus);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
+                    FormsAuthentication.SetAuthCookie(model.UserName, false );
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
                     ModelState.AddModelError("", ErrorCodeToString(createStatus));
-                }
+                } */
             }
 
             // If we got this far, something failed, redisplay form
@@ -191,5 +235,13 @@ namespace CosmosMusic.Controllers
             }
         }
         #endregion
+
+        #region Helpers
+            
+
+
+
+        #endregion
+
     }
 }

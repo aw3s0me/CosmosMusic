@@ -195,6 +195,8 @@
     <Property Name="username" Type="varchar" Nullable="false" MaxLength="50" />
     <Property Name="password" Type="varchar" Nullable="false" MaxLength="50" />
     <Property Name="id_role" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="email" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="isRemember" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="added user">
     <End Role="Users" Type="korovin_idzModel.Store.Users" Multiplicity="1" />
@@ -407,15 +409,4 @@
     <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <!--Errors Found During Generation:
-      warning 6005: The function 'add_album' has a parameter 'TVP' at parameter index 0 that has a data type 'table type' which is currently not supported for the target .NET Framework version. The function was excluded.
-      
-      <Function Name="add_album" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-        <Parameter Name="album_name" Type="varchar" Mode="In" />
-        <Parameter Name="year" Type="int" Mode="In" />
-        <Parameter Name="add_date" Type="datetime" Mode="In" />
-        <Parameter Name="rating" Type="int" Mode="In" />
-        <Parameter Name="cover" Type="varchar" Mode="In" />
-        <Parameter Name="add_username" Type="varchar" Mode="In" />
-      </Function>-->
 </Schema>

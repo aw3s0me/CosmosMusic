@@ -81,6 +81,8 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="korovin_idzModel.Users">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="isRemember" ColumnName="isRemember" />
+          <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="birth_date" ColumnName="birth_date" />
