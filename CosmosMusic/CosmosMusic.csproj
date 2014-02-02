@@ -245,6 +245,16 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\SooperFish\images\arrows-black.png" />
+    <Content Include="Scripts\SooperFish\images\arrows-white.png" />
+    <Content Include="Scripts\SooperFish\jquery.easing-sooper.js" />
+    <Content Include="Scripts\SooperFish\jquery.sooperfish.js" />
+    <Content Include="Scripts\SooperFish\jquery.sooperfish.min.js" />
+    <Content Include="Scripts\SooperFish\sooperfish.css" />
+    <Content Include="Scripts\SooperFish\themes\sooperfish-theme-black.css" />
+    <Content Include="Scripts\SooperFish\themes\sooperfish-theme-glass.css" />
+    <Content Include="Scripts\SooperFish\themes\sooperfish-theme-large.css" />
+    <Content Include="Scripts\SooperFish\themes\sooperfish-theme-silver.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

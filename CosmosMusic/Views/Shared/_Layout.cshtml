@@ -3,8 +3,23 @@
 <head>
     <title>@ViewBag.Title</title> 
     <meta charset="utf-8" /> 
-    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" /> 
+    <link href="~/Content/Site.css" rel="stylesheet" />
     <script src="@Url.Content("~/Scripts/jquery-2.0.3.min.js")" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            $('#ddmenu li').hover(function () {
+                clearTimeout($.data(this, 'timer'));
+                $('ul', this).stop(true, true).slideDown(200);
+            }, function () {
+                $.data(this, 'timer', setTimeout($.proxy(function () {
+                    $('ul', this).stop(true, true).slideUp(200);
+                }, this), 100));
+            });
+
+        });
+
+    </script>
+
 <!--    <script src="Url.Content("~/Scripts/modernizr-2.7.1.js")" type="text/javascript"></script> -->
 <!--    <script src="Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script> -->
 <!--    <script src="Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script> -->
@@ -14,13 +29,34 @@
         <div id="header">
             <img id="banner" src="~/Content/Images/banner.jpg" alt="logo" />
         </div>
-        <div id="hormenu">
-            <ul>
-                <li><a href="/" >Home</a></li>
-                <li><a href="/Music/">Music</a></li>
-                <li><a href="/Account/LogOn/">Log in</a></li>
-                <li><a href="/Account/Register/">Register</a></li>
-            </ul>
+       <div id="hormenu"> 
+           <nav>
+                <ul class="ddmenu">
+                    <li><a href="/" >Home</a></li>
+                    <li><a href="/Music/">Music</a></li>
+                    @if(!HttpContext.Current.User.Identity.IsAuthenticated) {
+                        <li><a href="/Account/LogOn/">Log in</a></li>
+                        <li><a href="/Account/Register/">Register</a></li>
+                    }
+                    else
+                    {
+                        if (User.IsInRole("moderator") || User.IsInRole("admin"))
+                        {
+                            <li><a href="#">Admin</a>
+                                <ul>
+                                    <li><a href="/AlbumManager/">Album Manager</a></li>
+                                    <li><a href="/ArtistManager/">Artist Manager</a></li>
+                                    @if (User.IsInRole("admin"))
+                                    {
+                                        <li><a href="/UserManager/">User Manager</a></li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                        <li><a href="/Account/LogOff/">Log off</a></li>
+                    }
+                </ul>
+            </nav>
         </div>
         <br />
         <div id="content">

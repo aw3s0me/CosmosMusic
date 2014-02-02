@@ -54,7 +54,7 @@ namespace CosmosMusic.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
-
+            Session.Abandon();
             return RedirectToAction("Index", "Home");
         }
 
@@ -103,23 +103,12 @@ namespace CosmosMusic.Controllers
                         //Place for authorize cookie ?
                         FormsAuthentication.SetAuthCookie(model.UserName, false);
                         //return RedirectToAction("LogOn","Account");
-                        
-                        return RedirectToAction("Home", "Index");
+
+                        return RedirectToAction("Index", "Home");
                     }
 
                 }
-               /* MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, "question", "answer", true, null, out createStatus);
 
-                if (createStatus == MembershipCreateStatus.Success)
-                {
-                    FormsAuthentication.SetAuthCookie(model.UserName, false );
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ModelState.AddModelError("", ErrorCodeToString(createStatus));
-                } */
             }
 
             // If we got this far, something failed, redisplay form
