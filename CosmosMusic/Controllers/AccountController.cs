@@ -31,38 +31,20 @@ namespace CosmosMusic.Controllers
             if (ModelState.IsValid)
             {
                 var user = db.Users.Where(x => x.username == model.UserName && x.password == model.Password).FirstOrDefault();
-                user.isRemember = model.RememberMe;
-                db.SaveChanges();
-
+                
                 if (user != null)
                 {
+                    user.isRemember = model.RememberMe;
+                    db.SaveChanges();
                     ViewBag.UserName = model.UserName;
-                    FormsAuthentication.RedirectFromLoginPage(model.UserName, false); //HZ??!?
-                }
-                else
-                {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
-                }
-                /*if (Membership.ValidateUser(model.UserName, model.Password))
-                {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
-                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                        && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
-                    {
-                        return Redirect(returnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
+                    FormsAuthentication.RedirectFromLoginPage(model.UserName, false); 
                 }
                 else
                 {
                     ModelState.AddModelError("", "The user name or password provided is incorrect.");
-                } */
+                }
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -119,8 +101,10 @@ namespace CosmosMusic.Controllers
                         db.Users.Add(newuser);
                         db.SaveChanges();
                         //Place for authorize cookie ?
-
-                        return RedirectToAction("LogOn","Account");
+                        FormsAuthentication.SetAuthCookie(model.UserName, false);
+                        //return RedirectToAction("LogOn","Account");
+                        
+                        return RedirectToAction("Home", "Index");
                     }
 
                 }
