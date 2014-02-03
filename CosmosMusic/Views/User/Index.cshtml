@@ -1,5 +1,71 @@
-﻿@{
+﻿@model CosmosMusic.Models.Users
+
+@{
     ViewBag.Title = "User Index";
 }
 
-<h2 style="color: white">User Index</h2>
+<h2>Details</h2>
+
+<fieldset>
+    <legend>User Information</legend>
+    <div class="display-label">
+         <b>@Html.DisplayNameFor(model => model.username)</b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.username)
+    </div>
+    <div class="display-label">
+         <b>@Html.DisplayNameFor(model => model.name)</b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+    <div class="display-label">
+        <b>@Html.DisplayName("Rights")</b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Role.name)
+    </div>
+    <div class="display-label">
+         <b>@Html.DisplayNameFor(model => model.birth_date)</b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.birth_date)
+    </div>
+    <div class="display-label">
+        <b>@Html.DisplayName("Country")</b>
+    </div>
+    <div class="display-field">
+        @if (Model.Country.Count > 0)
+        {
+            foreach (var country in Model.Country)
+            {
+                @Html.Raw(country.name + " / ");
+            }
+        }
+        else
+        {
+            @Html.Raw("none");
+        }
+    </div>
+    <div class="display-label">
+        <b>@Html.DisplayName("Favourite Artists")</b>
+    </div>
+    <div class="display-field">
+        @if (Model.Artists.Count > 0)
+        {
+            foreach (var artist in Model.Artists)
+            {
+                @Html.ActionLink(artist.name, "Albums", new { artist = artist.artist_id.ToString() });
+                @Html.Raw(" \\ ");
+            }
+        }
+        else
+        {
+            @Html.Raw("none");
+        }
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit");
+</p>

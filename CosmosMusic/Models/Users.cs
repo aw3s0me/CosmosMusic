@@ -11,6 +11,7 @@ namespace CosmosMusic.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     
     public partial class Users
     {
@@ -21,13 +22,19 @@ namespace CosmosMusic.Models
             this.Country = new HashSet<Country>();
             this.Artists = new HashSet<Artists>();
         }
-    
+        [DisplayName("User ID")]
         public System.Guid user_id { get; set; }
+        [DisplayName("Name")]
         public string name { get; set; }
+        [DisplayName("Birth date")]
         public Nullable<System.DateTime> birth_date { get; set; }
+        [DisplayName("Username")]
         public string username { get; set; }
+        [DisplayName("Password")]
         public string password { get; set; }
+        [DisplayName("Rights")]
         public System.Guid id_role { get; set; }
+        [DisplayName("User Email")]
         public string email { get; set; }
         public bool isRemember { get; set; }
     

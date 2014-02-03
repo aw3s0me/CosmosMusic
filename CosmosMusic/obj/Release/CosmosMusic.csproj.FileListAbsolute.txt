@@ -35,3 +35,4 @@ C:\Work\CosmosMusic\CosmosMusic\obj\Release\CosmosMusic.Properties.Resources.res
 C:\Work\CosmosMusic\CosmosMusic\obj\Release\CosmosMusic.csproj.GenerateResource.Cache
 C:\Work\CosmosMusic\CosmosMusic\obj\Release\CosmosMusic.dll
 C:\Work\CosmosMusic\CosmosMusic\obj\Release\CosmosMusic.pdb
+C:\Work\CosmosMusic\CosmosMusic\obj\Release\CosmosMusic.csprojResolveAssemblyReference.cache
