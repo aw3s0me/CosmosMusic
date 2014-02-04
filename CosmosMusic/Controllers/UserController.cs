@@ -31,7 +31,15 @@ namespace CosmosMusic.Controllers
             if (HttpContext.User.Identity.IsAuthenticated)
             {
                 var userName = HttpContext.User.Identity.Name;
-                var user = db.Users.Where(x => x.name == userName).FirstOrDefault();
+                var user = db.Users.Where(x => x.username == userName).FirstOrDefault();
+                if (user.Country.Count > 0)
+                {
+                    ViewBag.Countries = new MultiSelectList(db.Country, "id_country", "name", user.Country.Select(m => m.id_country));
+                }
+                else
+                {
+                    ViewBag.Countries = new MultiSelectList(db.Country, "id_country", "name");
+                }
                 return View(user);
             }
             return HttpNotFound();
@@ -44,6 +52,7 @@ namespace CosmosMusic.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(users).State = System.Data.Entity.EntityState.Modified;
+                //There handle of string array goes
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
