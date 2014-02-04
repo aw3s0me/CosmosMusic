@@ -21,6 +21,7 @@ namespace CosmosMusic.Models
             this.History = new HashSet<History>();
             this.Country = new HashSet<Country>();
             this.Artists = new HashSet<Artists>();
+            this.SelectedCountries = new List<string>();
         }
         [DisplayName("User ID")]
         public System.Guid user_id { get; set; }
@@ -43,5 +44,6 @@ namespace CosmosMusic.Models
         public virtual Role Role { get; set; }
         public virtual ICollection<Country> Country { get; set; }
         public virtual ICollection<Artists> Artists { get; set; }
+        public virtual List<string> SelectedCountries { get; set; }
     }
 }

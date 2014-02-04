@@ -57,7 +57,7 @@
             @Html.Label("Country")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("User countries", (ViewBag.Countries as MultiSelectList), new { multiple = "multiple", @class = "chosen", style = "width: 350px;"})
+            @Html.DropDownList("SelectedCountries", (ViewBag.Countries as MultiSelectList), new { multiple = "multiple", @class = "chosen", style = "width: 350px;"})
         </div>
         <p>
             <input type="submit" value="Save" />
