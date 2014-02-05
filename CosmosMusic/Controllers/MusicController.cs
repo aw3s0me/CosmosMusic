@@ -54,9 +54,9 @@ namespace CosmosMusic2.Controllers
             {
                 ArtistGuid = new Guid(id);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
+                return HttpNotFound();
             }
 
             var artist = AlbumsContext.Artists.Find(ArtistGuid);
@@ -75,9 +75,9 @@ namespace CosmosMusic2.Controllers
             {
                 AlbumGuid = new Guid(id);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-             
+                return HttpNotFound();
             }
 
             var album = AlbumsContext.Albums.Find(AlbumGuid);

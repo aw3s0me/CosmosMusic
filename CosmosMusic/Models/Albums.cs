@@ -7,6 +7,7 @@ namespace CosmosMusic.Models
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Web;
     using System.Web.Mvc;
 
       public partial class Albums
@@ -70,11 +71,13 @@ namespace CosmosMusic.Models
         [Range(1900, 2015, ErrorMessage = "Year must be between 1900 and 2015")]
           public Nullable<int> year { get; set; }
 
+        public HttpPostedFileBase imageFile { get; set; }
+
         #region collections
      
           public virtual Users Users { get; set; }
           public virtual ICollection<Song> Song { get; set; }
-        public virtual ICollection<Artists> Artists { get; set; }
+            public virtual ICollection<Artists> Artists { get; set; }
         public virtual ICollection<Genre> Genres { get; set; }
          #endregion
  
