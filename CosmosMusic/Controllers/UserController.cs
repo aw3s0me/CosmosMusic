@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CosmosMusic.Models;
+using CosmosMusic.ViewModels;
 
 namespace CosmosMusic.Controllers
 {
@@ -32,32 +33,66 @@ namespace CosmosMusic.Controllers
             {
                 var userName = HttpContext.User.Identity.Name;
                 var user = db.Users.Where(x => x.username == userName).FirstOrDefault();
+                var userViewModel = new UserViewModel
+                {
+                    Username = user.username,
+                    Name = user.name,
+                    Country = user.Country,
+                    DateofBirth = user.birth_date,
+                    Email = user.email,
+                    Artists = user.Artists
+                    //SelectedArtists = user.Artists.Select(x => x.name).ToList()
+                };
 
-                ViewBag.Countries = new MultiSelectList(db.Country, "id_country", "name", user.SelectedCountries);
-
-                return View(user);
+                ViewBag.Countries = new MultiSelectList(db.Country, "id_country", "name", userViewModel.SelectedCountries);
+                
+                ViewBag.Artists = new MultiSelectList(db.Artists, "artist_id", "name", userViewModel.SelectedArtists);
+                /*foreach (var artist in userViewModel.Artists)
+                {
+                    (ViewBag.Countries as MultiSelectList).Items
+                    artist.Selected = true;
+                }
+                foreach (var country in userViewModel.Country)
+                {
+                    country.Selected = true;
+                } */
+                return View(userViewModel);
             }
             return HttpNotFound();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Users users)
+        public ActionResult Edit(UserViewModel userModel)
         {
             if (ModelState.IsValid)
             {
-                foreach (var country in users.SelectedCountries)
+                var userDb = db.Users.Where(x => x.username == userModel.Username).FirstOrDefault();
+                foreach (var country in userModel.SelectedCountries)
                 {
                     var dbCountry = db.Country.Find(new Guid(country));
                     if (dbCountry != null)
-                        users.Country.Add(dbCountry);
+                        userDb.Country.Add(dbCountry);
                 }
-                db.Entry(users).State = System.Data.Entity.EntityState.Modified;
+                foreach (var artist in userModel.SelectedArtists)
+                {
+                    var dbArtist = db.Artists.Find(new Guid(artist));
+                    if (dbArtist != null)
+                        userDb.Artists.Add(dbArtist);
+
+                }
+
+                userDb.email = userModel.Email;
+                userDb.birth_date = userModel.DateofBirth;
+                userDb.name = userModel.Name;
+                userDb.username = userModel.Username;
+
+                db.Entry(userDb).State = System.Data.Entity.EntityState.Modified;
                 //There handle of string array goes
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(users);
+            return View(userModel);
         }
 
     }

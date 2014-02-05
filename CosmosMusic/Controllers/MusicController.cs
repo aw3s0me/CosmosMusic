@@ -60,12 +60,12 @@ namespace CosmosMusic2.Controllers
             }
 
             var artist = AlbumsContext.Artists.Find(ArtistGuid);
-            var albums = (from s in AlbumsContext.Song
+            ViewBag.Albums = (from s in AlbumsContext.Song
                         from c in s.Artists
                         where c.artist_id == artist.artist_id
                         select s.Albums).Distinct().ToList();
 
-            return View(albums);
+            return View(artist);
         }
 
         public ActionResult AlbumDetail(string id)

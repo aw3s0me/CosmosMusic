@@ -1,20 +1,52 @@
-﻿@model IEnumerable<CosmosMusic.Models.Albums>
+﻿@model CosmosMusic.Models.Artists
 
 @{
     ViewBag.Title = "Browse Albums";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script src="~/Scripts/Aw3_lightbox.js"></script>
+
+@Html.Raw("<script>$(document).ready(function() {");
+@Html.Raw("$('.modal1').Aw3_lightbox({" + "content : '<img src=" + "\"/Content/Images/Covers/" + @Model.image + "\" />'});");
+    @Html.Raw("});</script>");
+
 <h2>Browsing Artist: @Request.Params["genre"]</h2>
 
-<div class="music_block">
-    <ul>
-@foreach (var album in Model)
+<fieldset>
+    <legend>Artist Information</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+    <a href="#" class="modal1"><img class="artistImg" src="\Content\Images\ArtistImages\@Model.image"/></a>
+    <div class="display-label">
+        @Html.Label("Country")
+    </div>
+    <div class="display-field">
+        @foreach (var country in Model.Country)
+        {
+            @Html.Raw(country.name + " / ");
+        }
+    </div>
+    <div class="display-label">
+        @Html.Label("Albums")
+    </div>
+<!-- <div class="music_block"> -->
+@foreach (var album in ViewBag.Albums)
 {
     <!--<li>Html.ActionLink(album.name, "AlbumDetail", new { id = album.album_id.ToString} )</li> -->
-    <li><a href="@Url.Action("AlbumDetail","Music", new { @id = album.album_id.ToString()} )">@album.name</a></li>
+    <p><a href="@Url.Action("AlbumDetail","Music", new { @id = album.album_id.ToString()} )">@album.name</a></p>
 }
-        </ul>
-    </div>
 
+
+@if (User.Identity.IsAuthenticated)
+{
+
+
+}
+</fieldset>
 
