@@ -14,9 +14,9 @@ namespace CosmosMusic.Models
       {
           public Albums()
           {
-              this.Song = new HashSet<Song>();
+            this.Song = new HashSet<Song>();
  
-             this.Artists = new HashSet<Artists>();
+            this.Artists = new HashSet<Artists>();
             foreach (var sng in this.Song)
             {
                  foreach (var artist in sng.Artists)
@@ -38,58 +38,59 @@ namespace CosmosMusic.Models
  
              #endregion
  
-          }
-         [ScaffoldColumn(false)]
+        }
+        [ScaffoldColumn(false)]
         [Required(ErrorMessage = "Album id is required")]
      
-          public System.Guid album_id { get; set; }
+        public System.Guid album_id { get; set; }
         
         [DisplayName("Album name")]
-       [StringLength(50)]
+        [StringLength(50)]
         [Required(ErrorMessage = "Album name is required")]
-          public string name { get; set; }
+        public string name { get; set; }
 
-         [DisplayName("Added at")]
-         [Required(ErrorMessage = "Add date is required")]
-          public Nullable<System.DateTime> add_date { get; set; }
+        [DisplayName("Added at")]
+        [Required(ErrorMessage = "Add date is required")]
+        public Nullable<System.DateTime> add_date { get; set; }
 
         [DisplayName("Rating")]
         [ScaffoldColumn(false)]
         [Required(ErrorMessage = "Rating is required")]
-          public Nullable<int> rating { get; set; }
+        public Nullable<int> rating { get; set; }
  
-         [DisplayName("Cover name")]
+        [DisplayName("Cover name")]
         [StringLength(50, ErrorMessage = "String length must be no longer than 50 symbols")]
         [Required(ErrorMessage = "Cover name is required")]
-          public string cover { get; set; }
+        public string cover { get; set; }
 
         [DisplayName("User added")]
         [Required(ErrorMessage = "Username is required")]
-          public System.Guid user_id { get; set; }
+        public System.Guid user_id { get; set; }
         [DisplayName("Year")]
-       [Required(ErrorMessage = "Year is required")]
+        [Required(ErrorMessage = "Year is required")]
         [Range(1900, 2015, ErrorMessage = "Year must be between 1900 and 2015")]
-          public Nullable<int> year { get; set; }
+        public Nullable<int> year { get; set; }
 
-        public HttpPostedFileBase imageFile { get; set; }
+        //public HttpPostedFileBase imageFile { get; set; }
 
         #region collections
      
-          public virtual Users Users { get; set; }
-          public virtual ICollection<Song> Song { get; set; }
-            public virtual ICollection<Artists> Artists { get; set; }
+        public virtual Users Users { get; set; }
+        public virtual ICollection<Song> Song { get; set; }
+        public virtual ICollection<Artists> Artists { get; set; }
         public virtual ICollection<Genre> Genres { get; set; }
-         #endregion
+        public virtual List<string> SelectedArtists { get; set; }
+        #endregion
  
-         #region funcs
+        #region funcs
         public void GenreInit()
-         {
-             foreach (var artist in this.Artists)
+        {
+            foreach (var artist in this.Artists)
             {
                foreach (var genre in artist.Genre)
-                {
+               {
                     this.Genres.Add(genre);
-                }
+               }
             }
         }
         #endregion

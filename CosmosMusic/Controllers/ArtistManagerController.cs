@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -49,7 +50,11 @@ namespace CosmosMusic.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var newArtist = new Artists();
+            ViewBag.Countries = new MultiSelectList(db.Country, "id_country", "name", newArtist.SelectedCountries);
+            ViewBag.Genres = new MultiSelectList(db.Genre, "id_genre", "name", newArtist.SelectedGenres);
+
+            return View(newArtist);
         }
 
         //
@@ -57,11 +62,45 @@ namespace CosmosMusic.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Artists artists)
+        public ActionResult Create(Artists artists, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    var pathToFolder = Server.MapPath("~/Content/Images/ArtistImages");
+                    var fileName = file.FileName.Replace("+", "");
+                    var totalPath = Path.Combine(pathToFolder, fileName);
+                    if (file.ContentLength > 0)
+                    {
+                        string extension = Path.GetExtension(Request.Files[0].FileName).ToLower();
+                        if (extension != ".jpg" && extension != ".png" && extension != ".gif")
+                        {
+                            ModelState.AddModelError("uploadError", "Supported file extensions: jpg, png, gif");
+                            return View(artists);
+                        }
+                        artists.image = fileName;
+                        file.SaveAs(totalPath);
+                    }
+                }
+
+                foreach (var country in artists.SelectedCountries)
+                {
+                    var dbCountry = db.Country.Find(new Guid(country));
+                    if (dbCountry != null)
+                        artists.Country.Add(dbCountry);
+                }
+                foreach (var genre in artists.SelectedGenres)
+                {
+                    var dbGenre = db.Genre.Find(new Guid(genre));
+                    if (dbGenre != null)
+                        artists.Genre.Add(dbGenre);
+                }
+
                 artists.artist_id = Guid.NewGuid();
+
+
+
                 db.Artists.Add(artists);
                 db.SaveChanges();
                 return RedirectToAction("Index");

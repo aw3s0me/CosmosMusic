@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using CosmosMusic.Models;
@@ -52,7 +53,9 @@ namespace CosmosMusic.Controllers
         public ActionResult Create()
         {
             ViewBag.user_id = new SelectList(db.Users, "user_id", "name");
-            return View();
+            var emptyAlbum = new Albums();
+            ViewBag.Artists = new MultiSelectList(db.Artists, "artist_id", "name", emptyAlbum.SelectedArtists);
+            return View(emptyAlbum);
         } 
 
         /*
@@ -95,8 +98,17 @@ namespace CosmosMusic.Controllers
         [HttpPost]
         public ActionResult Create(Albums albums, IEnumerable<HttpPostedFileBase> files)
         {
+
             if (ModelState.IsValid)
             {
+                bool isImageUploaded = false;
+                var pathToFolder = Server.MapPath("~/Content/Uploads");
+                var folderNameFromAlbumName = MakeValidFileName(albums.name.Replace(" ", "_"));
+                var totalPath = Path.Combine(pathToFolder, folderNameFromAlbumName);
+                if (!CreateFolder(totalPath)){
+                    ModelState.AddModelError("uploadError", "This album already exists");
+                    return View(albums);
+                }
 
                 foreach (var file in files)
                 {
@@ -111,8 +123,26 @@ namespace CosmosMusic.Controllers
                             return View(albums);
                         }
 
+                        var path = Path.Combine(totalPath, fileName);
 
-                        var path = Path.Combine(Server.MapPath("~/Uploads"), fileName);
+                        if (extension == ".jpg" && extension == ".png" && extension == ".gif")
+                        {
+                            if (isImageUploaded)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                albums.cover = path;
+                                isImageUploaded = true;
+                            }
+                        }
+
+                        if (extension == ".mp3")
+                        {
+
+                        }
+
                         file.SaveAs(path);
                     }
                 }
@@ -129,7 +159,7 @@ namespace CosmosMusic.Controllers
             }
 
             ViewBag.user_id = new SelectList(db.Users, "user_id", "name", albums.user_id);
-
+            ViewBag.Artists = new MultiSelectList(db.Artists, "artist_id", "name", albums.SelectedArtists);
             
             return RedirectToAction("Index");
 
@@ -267,6 +297,19 @@ namespace CosmosMusic.Controllers
             return result;
         }
 
+        public string MakeValidFileName(string name)
+        {
+            var builder = new StringBuilder();
+            var invalid = System.IO.Path.GetInvalidFileNameChars();
+            foreach (var cur in name)
+            {
+                if (!invalid.Contains(cur))
+                {
+                    builder.Append(cur);
+                }
+            }
+            return builder.ToString();
+        }
 
         #endregion
 

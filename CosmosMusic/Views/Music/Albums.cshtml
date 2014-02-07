@@ -8,7 +8,7 @@
 <script src="~/Scripts/Aw3_lightbox.js"></script>
 
 @Html.Raw("<script>$(document).ready(function() {");
-@Html.Raw("$('.modal1').Aw3_lightbox({" + "content : '<img src=" + "\"/Content/Images/Covers/" + @Model.image + "\" />'});");
+@Html.Raw("$('.modal1').Aw3_lightbox({" + "content : '<img src=" + "\"/Content/Images/ArtistImages/" + @Model.image + "\" />'});");
     @Html.Raw("});</script>");
 
 <h2>Browsing Artist: @Request.Params["genre"]</h2>
