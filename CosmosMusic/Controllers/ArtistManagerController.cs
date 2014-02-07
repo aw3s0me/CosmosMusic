@@ -125,7 +125,10 @@ namespace CosmosMusic.Controllers
             }
 
 
+
             Artists artists = db.Artists.Find(ArtistGuid);
+            ViewBag.Countries = new MultiSelectList(db.Country, "id_country", "name", artists.SelectedCountries);
+            ViewBag.Genres = new MultiSelectList(db.Genre, "id_genre", "name", artists.SelectedGenres);
             if (artists == null)
             {
                 return HttpNotFound();
@@ -138,12 +141,86 @@ namespace CosmosMusic.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Artists artists)
+        public ActionResult Edit(Artists artists, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(artists).State = EntityState.Modified;
-                db.SaveChanges();
+                var oldArtist = db.Artists.Find(artists.artist_id);
+                if (file != null)
+                {
+                    
+                    var pathToFolder = Server.MapPath("~/Content/Images/ArtistImages");
+                    var fileName = file.FileName.Replace("+", "");
+                    var totalPath = Path.Combine(pathToFolder, fileName);
+                    if (file.ContentLength > 0)
+                    {
+                        string extension = Path.GetExtension(Request.Files[0].FileName).ToLower();
+                        if (extension != ".jpg" && extension != ".png" && extension != ".gif")
+                        {
+                            ModelState.AddModelError("uploadError", "Supported file extensions: jpg, png, gif");
+                            return View(artists);
+                        }
+                        var oldFileName = Request["image"];
+                        
+                        if (System.IO.File.Exists(Path.Combine(pathToFolder, oldFileName)))
+                        {
+                            var oldFileInfo = new FileInfo(Path.Combine(pathToFolder, oldFileName));
+                            if (oldFileInfo != null)
+                            {
+                                try
+                                {
+                                    oldFileInfo.Delete();
+                                }
+                                catch (Exception)
+                                {
+                                    ModelState.AddModelError("uploadError", "Can't delete old image file");
+                                    return View(artists);
+                                }
+                            }
+                        }
+                        artists.image = fileName;
+                        file.SaveAs(totalPath);
+                    }
+                }
+
+                if (artists.SelectedCountries != null)
+                {
+                    oldArtist.Country.Clear();
+                    foreach (var country in artists.SelectedCountries)
+                    {
+                        var dbCountry = db.Country.Find(new Guid(country));
+                        if (dbCountry != null)
+                            artists.Country.Add(dbCountry);
+                    }
+                }
+                if (artists.SelectedGenres != null)
+                {
+                    oldArtist.Genre.Clear();
+                    foreach (var genre in artists.SelectedGenres)
+                    {
+                        var dbGenre = db.Genre.Find(new Guid(genre));
+                        if (dbGenre != null)
+                            artists.Genre.Add(dbGenre);
+                    }
+                }
+                
+                try {
+                    db.Entry(artists).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                catch (InvalidOperationException)
+                {
+                    
+                    db.Entry(oldArtist).CurrentValues.SetValues(artists); //ХУЙНЯ, ПОЧЕМУ ЗНАЧЕНИЯ НЕ СТАВЯТСЯ, НАДО МАППЕР
+                    //ПОКА ВРУЧНУЮ ЕБАШИТЬ
+                    oldArtist.Country = artists.Country;
+                    oldArtist.Genre = artists.Genre;
+                    oldArtist.image = artists.image;
+                    oldArtist.name = artists.name;
+                    db.Entry(oldArtist).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
                 return RedirectToAction("Index");
             }
             return View(artists);
