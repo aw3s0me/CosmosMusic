@@ -116,6 +116,7 @@ namespace CosmosMusic.Controllers
                 bool isImageUploaded = false;
                 var pathToFolder = Server.MapPath("~/Content/Uploads");
                 var folderNameFromAlbumName = MakeValidFileName(albums.name.Replace(" ", "_"));
+                
                 var totalPath = Path.Combine(pathToFolder, folderNameFromAlbumName);
                 if (!CreateFolder(totalPath)){
                     ModelState.AddModelError("uploadError", "This album already exists");
@@ -146,7 +147,9 @@ namespace CosmosMusic.Controllers
                             }
                             else
                             {
-                                albums.cover = path;
+                                
+
+                                albums.cover = folderNameFromAlbumName + "/" + file.FileName; ;
                                 isImageUploaded = true;
                             }
                         }
@@ -157,7 +160,7 @@ namespace CosmosMusic.Controllers
                             newSong.album_id = albums.album_id;
                             newSong.song_id = Guid.NewGuid();
                             newSong.song_name = fileName;
-                            newSong.song_path = path;
+                            newSong.song_path = folderNameFromAlbumName + "/" + fileName;
                             if (albums.SelectedArtists != null)
                             {
                                 foreach (var artist in albums.SelectedArtists)
