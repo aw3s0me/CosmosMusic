@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -98,9 +99,20 @@ namespace CosmosMusic.Controllers
         [HttpPost]
         public ActionResult Create(Albums albums, IEnumerable<HttpPostedFileBase> files)
         {
-
+            
             if (ModelState.IsValid)
             {
+                var songList = new List<Song>();
+                albums.album_id = Guid.NewGuid();
+                albums.add_date = DateTime.Now;
+                albums.rating = 0;
+                var choosedUser = db.Users.Find(albums.user_id);
+                if (choosedUser == null) {
+
+                }
+                else {
+                    albums.Users = choosedUser;
+                }
                 bool isImageUploaded = false;
                 var pathToFolder = Server.MapPath("~/Content/Uploads");
                 var folderNameFromAlbumName = MakeValidFileName(albums.name.Replace(" ", "_"));
@@ -109,14 +121,15 @@ namespace CosmosMusic.Controllers
                     ModelState.AddModelError("uploadError", "This album already exists");
                     return View(albums);
                 }
-
+                //var files = Request["file"] as IEnumerable<HttpPostedFileBase>;
                 foreach (var file in files)
                 {
+                    int i = 0;
                     if (file.ContentLength > 0)
                     {
                         var fileName = Path.GetFileName(file.FileName);
-                        string extension = Path.GetExtension(Request.Files[0].FileName).ToLower();
-
+                        //string extension = Path.GetExtension(Request.Files[0].FileName).ToLower();
+                        string extension = Path.GetExtension(file.FileName).ToLower();
                         if (extension != ".jpg" && extension != ".png" && extension != ".gif" && extension != ".mp3")
                         {
                             ModelState.AddModelError("uploadError", "Supported file extensions: pdf, doc, docx, rtf, txt");
@@ -125,7 +138,7 @@ namespace CosmosMusic.Controllers
 
                         var path = Path.Combine(totalPath, fileName);
 
-                        if (extension == ".jpg" && extension == ".png" && extension == ".gif")
+                        if (extension == ".jpg" || extension == ".png" || extension == ".gif")
                         {
                             if (isImageUploaded)
                             {
@@ -140,21 +153,62 @@ namespace CosmosMusic.Controllers
 
                         if (extension == ".mp3")
                         {
-
+                            var newSong = new Song();
+                            newSong.album_id = albums.album_id;
+                            newSong.song_id = Guid.NewGuid();
+                            newSong.song_name = fileName;
+                            newSong.song_path = path;
+                            if (albums.SelectedArtists != null)
+                            {
+                                foreach (var artist in albums.SelectedArtists)
+                                {
+                                    var dbArtist = db.Artists.Find(new Guid(artist));
+                                    if (dbArtist != null)
+                                        newSong.Artists.Add(dbArtist);
+                                }
+                            }
+                            songList.Add(newSong);
+                            //db.Song.Add(newSong);
+                            //db.SaveChanges();
                         }
 
                         file.SaveAs(path);
                     }
                 }
-                
 
 
-                albums.album_id = Guid.NewGuid();
-                albums.add_date = DateTime.Now;
-                albums.rating = 0;
-                
-                db.Albums.Add(albums);
-                db.SaveChanges();
+
+
+                try
+                {
+                    db.Albums.Add(albums);
+                    db.SaveChanges();
+
+                    if (songList.Count > 0)
+                    {
+                        foreach (var newSong in songList)
+                        {
+                            newSong.Albums = albums;
+                            db.Song.Add(newSong);
+                        }
+                        db.SaveChanges();
+                    }
+                }
+                catch (DbEntityValidationException e)
+                {
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                    throw;
+                }
+
                 return RedirectToAction("Index");
             }
 
@@ -167,7 +221,7 @@ namespace CosmosMusic.Controllers
 
         //
         // POST: /AlbumManager/Create
-
+/*
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Albums albums)
@@ -187,7 +241,7 @@ namespace CosmosMusic.Controllers
             return View(albums);
         }
 
-        
+        */
 
         //
         // GET: /AlbumManager/Edit/5

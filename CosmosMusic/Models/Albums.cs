@@ -49,18 +49,18 @@ namespace CosmosMusic.Models
         [Required(ErrorMessage = "Album name is required")]
         public string name { get; set; }
 
+        //[Required(ErrorMessage = "Add date is required")]
         [DisplayName("Added at")]
-        [Required(ErrorMessage = "Add date is required")]
         public Nullable<System.DateTime> add_date { get; set; }
 
+        //[Required(ErrorMessage = "Rating is required")]
         [DisplayName("Rating")]
-        [ScaffoldColumn(false)]
-        [Required(ErrorMessage = "Rating is required")]
+        [ScaffoldColumn(false)]        
         public Nullable<int> rating { get; set; }
- 
+
+        //[Required(ErrorMessage = "Cover name is required")]
         [DisplayName("Cover name")]
-        [StringLength(50, ErrorMessage = "String length must be no longer than 50 symbols")]
-        [Required(ErrorMessage = "Cover name is required")]
+        [StringLength(200, ErrorMessage = "String length must be no longer than 200 symbols")]
         public string cover { get; set; }
 
         [DisplayName("User added")]
