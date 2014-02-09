@@ -102,5 +102,12 @@ namespace CosmosMusic2.Controllers
             return View(album);
         }
 
+        [HttpPost]
+        public JsonResult History()
+        {
+            var result = new { Success = "True", Message = "Error Message" };
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

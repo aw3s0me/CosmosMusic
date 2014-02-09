@@ -20,7 +20,20 @@
         @Html.Raw("{ title : '" + @song.song_name + "' ," + "mp3 : '/Content/Uploads/" + @song.song_path +  "'},")
     }
     @Html.Raw("];");
-    @Html.Raw("var options = { swfPath : '/Scripts/jplayer', supplied : 'mp3', };");
+    @Html.Raw("var actionUrl = '" + @Url.Action("History", "Music") + "';"); 
+    @Html.Raw("var options = { swfPath : '/Scripts/jplayer', supplied : 'mp3', ");
+    if(HttpContext.Current.User.Identity.IsAuthenticated) {
+        @Html.Raw(" ended : function () {" +
+        "$.ajax({" +
+        "type: 'POST'," +
+        "url : actionUrl," +
+        "data : { isEnded: 'true' }," +
+        "success: function (data) {}," +
+        "error: function (xhr, ajaxOptions, thrownError) {" +
+            "alert('Cant add to history');" +
+        "}});}");
+    }
+    @Html.Raw("};");
     @Html.Raw("var myPlaylist = new jPlayerPlaylist(cssSelector, playlist, options);");
     @Html.Raw("$('.modal1').Aw3_lightbox({" +
         "content : '<img src=" + "\"/Content/Uploads/" + @Model.cover + "\" />'});");
@@ -28,7 +41,7 @@
     
     <div class="music">
         <a href="#" class="modal1">
-            <img class="albumImg" src="\Content\Uploads\@Model.cover"/></a>
+            <img class="albumImg" src="\Content\Uploads\@Model.cover" onError="this.onerror=null;this.src='/Content/Images/default_cover.png';" /></a>
         <h5>ID of album: @Model.album_id</h5>
         <h5>Style: 
             @foreach (var genre in Model.Genres)
