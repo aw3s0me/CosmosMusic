@@ -149,7 +149,7 @@ namespace CosmosMusic.Controllers
                             {
                                 
 
-                                albums.cover = folderNameFromAlbumName + "/" + file.FileName; ;
+                                albums.cover = folderNameFromAlbumName + "\\" + file.FileName; ;
                                 isImageUploaded = true;
                             }
                         }
@@ -160,7 +160,7 @@ namespace CosmosMusic.Controllers
                             newSong.album_id = albums.album_id;
                             newSong.song_id = Guid.NewGuid();
                             newSong.song_name = fileName;
-                            newSong.song_path = folderNameFromAlbumName + "/" + fileName;
+                            newSong.song_path = folderNameFromAlbumName + "\\" + fileName;
                             if (albums.SelectedArtists != null)
                             {
                                 foreach (var artist in albums.SelectedArtists)
