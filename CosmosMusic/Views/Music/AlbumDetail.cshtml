@@ -15,16 +15,20 @@
 @{
     @Html.Raw("<script>$(document).ready(function() {");
     @Html.Raw("var cssSelector = { jPlayer: '#jquery_jplayer_1', cssSelectorAncestor: '#jp_container_1' };");
-    @Html.Raw("var playlist = [];");
+    @Html.Raw("var playlist = [");
+    foreach(var song in Model.Song) {
+        @Html.Raw("{ title : '" + @song.song_name + "' ," + "mp3 : '/Content/Uploads/" + @song.song_path +  "'},")
+    }
+    @Html.Raw("];");
     @Html.Raw("var options = { swfPath : '/Scripts/jplayer', supplied : 'mp3', };");
     @Html.Raw("var myPlaylist = new jPlayerPlaylist(cssSelector, playlist, options);");
     @Html.Raw("$('.modal1').Aw3_lightbox({" +
-        "content : '<img src=" + "\"/Content/Images/Covers/" + @Model.cover + "\" />'});");
+        "content : '<img src=" + "\"/Content/Uploads/" + @Model.cover + "\" />'});");
     @Html.Raw("});</script>");
     
     <div class="music">
         <a href="#" class="modal1">
-            <img class="albumImg" src="\Content\Images\Covers\@Model.cover"/></a>
+            <img class="albumImg" src="\Content\Uploads\@Model.cover"/></a>
         <h5>ID of album: @Model.album_id</h5>
         <h5>Style: 
             @foreach (var genre in Model.Genres)
@@ -97,7 +101,8 @@
 					To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
 				</div>
 			</div>
-		</div>
+		</div>
+
     </div>
 }
 
