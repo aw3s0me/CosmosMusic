@@ -105,8 +105,37 @@ namespace CosmosMusic2.Controllers
         [HttpPost]
         public JsonResult History()
         {
-            var result = new { Success = "True", Message = "Error Message" };
-            return Json(result, JsonRequestBehavior.AllowGet);
+            try
+            {
+                var boolean = Request["isEnded"];
+                var trackName = Request["trackname"];
+                var albumId = Request["albumId"];
+                var album = AlbumsContext.Albums.Find(new Guid(albumId));
+                var song = album.Song.ToList().Where(x => x.song_name == trackName).FirstOrDefault();
+
+                var historyEntry = new History();
+                historyEntry.history_id = Guid.NewGuid();
+                historyEntry.listening_time = DateTime.Now;
+                historyEntry.Song = song;
+                historyEntry.song_id = song.song_id;
+
+                var username = User.Identity.Name;
+                var user = AlbumsContext.Users.Where(x => x.username == username).FirstOrDefault();
+
+                historyEntry.user_id = user.user_id;
+                historyEntry.Users = user;
+
+                AlbumsContext.History.Add(historyEntry);
+                AlbumsContext.SaveChanges();
+
+                var result = new { Success = "True", Message = "Success Message" };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                var result = new { Success = "False", Message = "Error Message" };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
         }
 
     }

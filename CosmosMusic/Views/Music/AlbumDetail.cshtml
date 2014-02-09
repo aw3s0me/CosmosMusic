@@ -21,13 +21,15 @@
     }
     @Html.Raw("];");
     @Html.Raw("var actionUrl = '" + @Url.Action("History", "Music") + "';"); 
+    @Html.Raw("var curTrack;");
     @Html.Raw("var options = { swfPath : '/Scripts/jplayer', supplied : 'mp3', ");
     if(HttpContext.Current.User.Identity.IsAuthenticated) {
+        @Html.Raw(" play : function () {" + "curTrack = myPlaylist.playlist[myPlaylist.current].title;},");
         @Html.Raw(" ended : function () {" +
         "$.ajax({" +
         "type: 'POST'," +
         "url : actionUrl," +
-        "data : { isEnded: 'true' }," +
+        "data : { isEnded: 'true', trackname: curTrack, albumId : " + "\"" + @Model.album_id.ToString() + "\"}," +
         "success: function (data) {}," +
         "error: function (xhr, ajaxOptions, thrownError) {" +
             "alert('Cant add to history');" +
