@@ -447,6 +447,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -504,6 +506,8 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\BackloadDemo\Index.cshtml" />
+    <Content Include="Views\User\History.cshtml" />
+    <Content Include="Views\Music\PartialAlbums.cshtml" />
     <None Include="Web.Backload.Default.config" />
     <None Include="Web.Backload.xsd">
       <SubType>Designer</SubType>

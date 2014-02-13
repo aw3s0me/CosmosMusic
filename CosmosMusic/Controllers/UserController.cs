@@ -15,7 +15,7 @@ namespace CosmosMusic.Controllers
 
         //
         // GET: /User/
-
+/*
         public ActionResult Index()
         {
             if (HttpContext.User.Identity.IsAuthenticated)
@@ -26,6 +26,58 @@ namespace CosmosMusic.Controllers
             }
             return HttpNotFound();
         }
+*/
+        public ActionResult Index(string userName)
+        {
+            try
+            {
+                userName = HttpContext.User.Identity.Name;
+                var user = db.Users.Where(x => x.username == userName).FirstOrDefault();
+                return View(user);
+            }
+            catch (Exception)
+            {
+                return HttpNotFound();
+            }
+        }
+
+
+        public ActionResult History(/*string userGuid*/)
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                var userName = HttpContext.User.Identity.Name;
+                var user = db.Users.Where(x => x.username == userName).FirstOrDefault();
+
+                HashSet<CosmosMusic.Models.Artists> artists = new HashSet<Artists>();
+                Dictionary<string, int> artistCount = new Dictionary<string, int>();
+                //var artistCount;
+                foreach (var entry in user.History)
+                {
+                    foreach (var artist in entry.Song.Artists)
+                    {
+                        artists.Add(artist);
+                    }
+                }
+
+                
+              /*  foreach (var artist in artists)
+                {
+                    artistCount[artist.artist_id.ToString()] = (from a in db.History
+                                                                from b in a.Song.Artists
+                                                                where b == artist
+                                                                select new { a}).Count();
+                } */
+
+                //return View(user);
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("History", user);
+                }
+            }
+            return HttpNotFound();
+        }
+
 
         public ActionResult Edit()
         {

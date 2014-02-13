@@ -4,6 +4,15 @@
     ViewBag.Title = "User Index";
 }
 
+<script src="~/Scripts/jquery-2.0.3.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script>
+    function postSuccess(data) {
+        $('#historyDiv').html(data);
+    }
+</script>
+
+
 <h2>Details</h2>
 
 <fieldset>
@@ -66,6 +75,15 @@
         }
     </div>
 </fieldset>
+@if (HttpContext.Current.User.Identity.IsAuthenticated && HttpContext.Current.User.Identity.Name == Model.username) {
 <p>
     @Html.ActionLink("Edit", "Edit");
 </p>
+<p>
+    @Ajax.ActionLink("My History", "History", "User", new AjaxOptions() { HttpMethod = "Get", OnSuccess = "postSuccess"}); 
+    
+</p>
+<div id="historyDiv">
+        
+</div>
+}

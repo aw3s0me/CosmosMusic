@@ -1,0 +1,25 @@
+﻿@model CosmosMusic.Models.Users
+
+@{
+    ViewBag.Title = "History";
+    @*Layout = "~/Views/Shared/_Layout.cshtml"; *@
+}
+
+<h2>History of user: @Model.username</h2>
+
+<table style="max-width:900px">
+@foreach (var entry in Model.History) {
+<tr>
+    <td>
+        @Html.Raw(entry.Song.song_name) 
+    </td>
+    <td>
+        @Html.Raw(entry.listening_time)
+    </td>
+</tr>
+}
+</table>
+<br />
+
+
+

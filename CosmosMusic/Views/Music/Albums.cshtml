@@ -5,11 +5,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script src="~/Scripts/jquery-2.0.3.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script src="~/Scripts/Aw3_lightbox.js"></script>
 
 @Html.Raw("<script>$(document).ready(function() {");
 @Html.Raw("$('.modal1').Aw3_lightbox({" + "content : '<img src=" + "\"/Content/Images/ArtistImages/" + @Model.image + "\" />'});");
     @Html.Raw("});</script>");
+
+<script>
+    function postSuccess() {
+        if ($('.remove').html() === "Remove from favorites") {
+            $('.remove').text("Add to favorites");
+        }
+        else if ($('.remove').html() === "Add to favorites") {
+            $('.remove').text("Remove from favorites");
+        }
+    }
+</script>
 
 <h2>Browsing Artist: @Request.Params["genre"]</h2>
 
@@ -45,7 +58,21 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-
+<p>
+    
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        if (ViewBag.alreadyFavorite)
+        {
+            @Ajax.ActionLink("Remove from favorites", "Favorite", "Music", new { Id = Model.artist_id.ToString(), remove = true }, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "postSuccess" }, new { @class = "remove" });
+        }
+        else 
+        {
+            @Ajax.ActionLink("Add to favorites", "Favorite", "Music", new { Id = Model.artist_id.ToString(), remove = false }, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "postSuccess" }, new { @class = "remove" });
+        }
+        
+    }
+</p>
 
 }
 </fieldset>

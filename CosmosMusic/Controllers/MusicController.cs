@@ -47,9 +47,16 @@ namespace CosmosMusic2.Controllers
             return View(artistsByGenre);
         }
 
+       /* public ActionResult PartialAlbums(int page)
+        {
+
+        } */
+
+
         public ActionResult Albums(string id)
         {
             Guid ArtistGuid = Guid.Empty;
+            ViewBag.alreadyFavorite = false;
             try
             {
                 ArtistGuid = new Guid(id);
@@ -64,6 +71,18 @@ namespace CosmosMusic2.Controllers
                         from c in s.Artists
                         where c.artist_id == artist.artist_id
                         select s.Albums).Distinct().ToList();
+
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                var username = User.Identity.Name;
+                var user = AlbumsContext.Users.Where(x => x.username == username).FirstOrDefault();
+
+                if (user.Artists.Contains(artist))
+                {
+                    ViewBag.alreadyFavorite = true;
+                }
+            }
+
 
             return View(artist);
         }
@@ -136,6 +155,39 @@ namespace CosmosMusic2.Controllers
                 var result = new { Success = "False", Message = "Error Message" };
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        [HttpPost]
+        public JsonResult Favorite(string Id, bool remove)
+        {
+            try
+            {
+
+                //var artistId = Request["albumId"];
+                var artist = AlbumsContext.Artists.Find(new Guid(Id));
+
+                var userName = User.Identity.Name;
+                var user = AlbumsContext.Users.Where(x => x.username == userName).FirstOrDefault();
+
+                if (!remove)
+                {
+                    user.Artists.Add(artist);
+                }
+                else
+                {
+                    user.Artists.Remove(artist);
+                }
+
+                AlbumsContext.SaveChanges();
+                var result = new { Success = "True", Message = "Success Message" };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                var result = new { Success = "False", Message = "Error Message" };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+
         }
 
     }
