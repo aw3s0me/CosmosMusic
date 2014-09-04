@@ -20,6 +20,16 @@ namespace CosmosMusic.Controllers
             {
                 //var albums = db.Albums.ToList().OrderBy(x => x.add_date).Skip(Math.Max(0, db.Albums.ToList().Count() - 5));
                 var albums = db.Albums.ToList().OrderBy(x => x.add_date).Take(5);
+                foreach (var album in albums)
+                {
+                    foreach (var sng in album.Song)
+                    {
+                        foreach (var artist in sng.Artists)
+                        {
+                            album.Artists.Add(artist); //Should be unique
+                        }
+                    }
+                }
                 return View(albums);
             }
             catch (Exception)

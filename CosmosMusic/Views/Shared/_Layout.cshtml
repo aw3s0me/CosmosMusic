@@ -4,7 +4,11 @@
     <title>@ViewBag.Title</title> 
     <meta charset="utf-8" /> 
     <link href="~/Content/Site.css" rel="stylesheet" />
-    <script src="@Url.Content("~/Scripts/jquery-2.0.3.min.js")" type="text/javascript"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.0.3.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $('#ddmenu li').hover(function () {
@@ -43,7 +47,7 @@
                         <li><a href="/User/">My Profile</a></li>
                         if (User.IsInRole("moderator") || User.IsInRole("admin"))
                         {
-                            <li><a href="#">Admin</a>
+                            <li><!-- <a href="#">Admin</a>-->
                                 <ul>
                                     <li><a href="/AlbumManager/">Album Manager</a></li>
                                     <li><a href="/ArtistManager/">Artist Manager</a></li>

@@ -3,18 +3,48 @@
 @{
     ViewBag.Title = "Index";
 }
-@Html.Raw("<script>$(document).ready(function() {");
 
-@Html.Raw("}</script>");
+<link href="~/Content/grid.css" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/isotope.pkgd.min.js")" type="text/javascript"></script>
+<script type="text/javascript">$(document).ready(function () {
+    $('#isotope_container').isotope({
+        itemSelector: '.item',
+        masonry: {
+            columnWidth: 210
+        }
+    });
 
+});
+</script>
 
-<h2>Last added albums:</h2>
+<h2>Last added:</h2>
 
+<div id="isotope_container">
 @foreach (var album in Model)
 {
-    <p>
-    <a href="@Url.Action("AlbumDetail","Music", new { @id = album.album_id.ToString()} )"><img src="\Content\Uploads\@album.cover" onError="this.onerror=null;this.src='/Content/Images/default_cover.png';" alt="Edit" style="width: 500px; height: 500px;"/></a>
-    </p>
+    var artists = album.Artists;
+    var artistTitle = "";
+    if (artists.Count > 2) {
+        artistTitle = "Various Artists";
+    }
+    else if (artists.Count > 0) {
+        foreach (var artist in artists)
+        {
+            artistTitle += artist.name;
+            artistTitle += "\\";
+        }
+        artistTitle = artistTitle.Remove(@artistTitle.Length - 1);
+    }
+    else {
+        artistTitle = "Unknown artist";
+    }
+    var fullTitle = artistTitle + " - " + album.name;
+    
+    <a class="item" href="@Url.Action("AlbumDetail","Music", new { @id = album.album_id.ToString()} )">
+        <p class="title">@fullTitle</p>
+        <img src="\Content\Uploads\@album.cover" onError="this.onerror=null;this.src='/Content/Images/default_cover.png';" alt="Edit"/>
+    </a>   
 }
+</div>
 
 

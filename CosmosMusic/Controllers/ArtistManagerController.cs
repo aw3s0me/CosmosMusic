@@ -25,6 +25,22 @@ namespace CosmosMusic.Controllers
         //
         // GET: /ArtistManager/Details/5
 
+        [HttpPost]
+        public JsonResult ArtistList()
+        {
+            try
+            {
+                List<Artists> artists = db.Artists.ToList();
+                return Json(new { Result = "OK", Records = artists });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+
+        
+
         public ActionResult Details(string id = null)
         {
             Guid ArtistGuid = Guid.Empty;

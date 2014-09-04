@@ -5,9 +5,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/Content/artist_details.css" rel="stylesheet" type="text/css" />
 <script src="~/Scripts/jquery-2.0.3.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script src="~/Scripts/Aw3_lightbox.js"></script>
+<link href="~/Content/grid.css" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/isotope.pkgd.min.js")" type="text/javascript"></script>
+<script type="text/javascript">$(document).ready(function () {
+    $('#isotope_container').isotope({
+        itemSelector: '.item',
+        masonry: {
+            columnWidth: 120
+        }
+    });
+});
+</script>
+
 
 @Html.Raw("<script>$(document).ready(function() {");
 @Html.Raw("$('.modal1').Aw3_lightbox({" + "content : '<img src=" + "\"/Content/Images/ArtistImages/" + @Model.image + "\" />'});");
@@ -24,56 +37,58 @@
     }
 </script>
 
-<h2>Browsing Artist: @Request.Params["genre"]</h2>
+<!-- <h2>Browsing Artist: @Request.Params["genre"]</h2> -->
 
 <fieldset>
     <legend>Artist Information</legend>
+    <div class="artist_div">
+        <div class="artist_img_div">
+            <a href="#" class="modal1">
+                <img class="artist_img" src="\Content\Images\ArtistImages\@Model.image"/>
+            </a>
+        </div>
+        <div class="artist_info">
+            <div class="artist_name">
+                <span>Name:</span>@Model.name
+            </div>
+            <div class="artist_country">
+                <span>Country:</span>
+                @foreach (var country in Model.Country)
+                {
+                    @Html.Raw(country.name + " / ");
+                }
+            </div>
+            <h3>Albums: </h3>
+            <div class="albums isotope_container">
+                @foreach (var album in ViewBag.Albums)
+                {
+                    <a class="item" href="@Url.Action("AlbumDetail","Music", new { @id = album.album_id.ToString()} )">
+                        <p class="title">@album.name</p>
+                        <img src="\Content\Uploads\@album.cover" onError="this.onerror=null;this.src='/Content/Images/default_cover.png';" alt="Edit"/> 
+                    </a>  
+                }
+            </div>
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.name)
-    </div>
-    <a href="#" class="modal1"><img class="artistImg" src="\Content\Images\ArtistImages\@Model.image"/></a>
-    <div class="display-label">
-        @Html.Label("Country")
-    </div>
-    <div class="display-field">
-        @foreach (var country in Model.Country)
-        {
-            @Html.Raw(country.name + " / ");
-        }
-    </div>
-    <div class="display-label">
-        @Html.Label("Albums")
-    </div>
-<!-- <div class="music_block"> -->
-@foreach (var album in ViewBag.Albums)
-{
-    <!--<li>Html.ActionLink(album.name, "AlbumDetail", new { id = album.album_id.ToString} )</li> -->
-    <p><a href="@Url.Action("AlbumDetail","Music", new { @id = album.album_id.ToString()} )">@album.name</a></p>
-}
-
-
-@if (User.Identity.IsAuthenticated)
-{
-<p>
-    
-    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    @if (User.Identity.IsAuthenticated)
     {
-        if (ViewBag.alreadyFavorite)
+    <p>
+    
+        @if (HttpContext.Current.User.Identity.IsAuthenticated)
         {
-            @Ajax.ActionLink("Remove from favorites", "Favorite", "Music", new { Id = Model.artist_id.ToString(), remove = true }, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "postSuccess" }, new { @class = "remove" });
-        }
-        else 
-        {
-            @Ajax.ActionLink("Add to favorites", "Favorite", "Music", new { Id = Model.artist_id.ToString(), remove = false }, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "postSuccess" }, new { @class = "remove" });
-        }
+            if (ViewBag.alreadyFavorite)
+            {
+                @Ajax.ActionLink("Remove from favorites", "Favorite", "Music", new { Id = Model.artist_id.ToString(), remove = true }, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "postSuccess" }, new { @class = "remove" });
+            }
+            else 
+            {
+                @Ajax.ActionLink("Add to favorites", "Favorite", "Music", new { Id = Model.artist_id.ToString(), remove = false }, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "postSuccess" }, new { @class = "remove" });
+            }
         
-    }
-</p>
+        }
+    </p>
 
-}
+    }
+    </div>
 </fieldset>
 

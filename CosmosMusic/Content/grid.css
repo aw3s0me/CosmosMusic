@@ -1,0 +1,77 @@
+﻿a {
+    background: transparent;
+}
+
+a:focus {
+    outline: thin dotted;
+}
+
+a:active,
+a:hover {
+    outline: 0;
+}
+
+a,
+a code {
+  color: #FB4;
+  text-decoration: none;
+}
+
+a:hover{
+  color: #4BF;
+}
+
+a:active{
+  color: #1FB;
+  background: black;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+b,
+strong {
+    font-weight: bold;
+}
+
+img {
+    border: 0;
+}
+
+#isotope_container
+{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 20px;
+}
+
+.item {
+  display: block;
+  background: black;
+  background: hsla(0, 0%, 0%, 0.5);
+  float: left;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  width: 200px; 
+
+}
+
+.item img {
+  display: block;
+  max-width: 100%;
+  border-radius: 0 0 5px 5px;
+  width: 200px; 
+  height: 200px;
+}
+
+.item .title {
+  margin: 0;
+  padding: 10px;
+  font-size: 15px;
+  line-height: 1.5em;
+  font-family: 'Lucida Sans', 'Lucida Sans Unicode', Arial, sans-serif;
+  font-weight: 900;
+  text-align: center;
+}

@@ -6,10 +6,10 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
+<p style="margin-left: 8px;">
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
 </p>
-<table>
+<table style="width: 95%; margin: 0 auto;" class="table table-bordered table-striped crud-table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.artist_id)

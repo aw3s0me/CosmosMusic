@@ -35,6 +35,7 @@ namespace CosmosMusic2.Controllers
         public ActionResult Index()
         {
             var genres = AlbumsContext.Genre.ToList();
+            Console.Write(Request.ToString());
 
             return View(genres);
         }
@@ -44,7 +45,8 @@ namespace CosmosMusic2.Controllers
             //var albums = AlbumsContext.Artists.Where(p => p.Genre == genreEntity).ToList();
             var artistsByGenre = AlbumsContext.Genre.Where(p => p.name == genre).First().Artists.ToList();
 
-            return View(artistsByGenre);
+            //return View(artistsByGenre);
+            return PartialView("Browse", artistsByGenre);
         }
 
        /* public ActionResult PartialAlbums(int page)

@@ -1,0 +1,78 @@
+﻿.artist_div
+{
+    margin-top: 10px;
+}
+
+#content
+{
+   
+}
+
+.artist_info
+{
+    margin-top: 10px;
+    //float: right;
+}
+
+.artist_info h3
+{
+    margin: 0 auto;
+    padding-top: 8px;
+    padding-bottom: 8px;
+
+}
+
+
+.artist_img_div
+{
+    float: left;
+    width: 420px;
+}
+
+.artist_img
+{
+    margin-top: 10px;
+   width: 400px;
+}
+
+.artist_name
+{
+    
+}
+
+.artist_name span
+{
+    font-weight: 700;
+    font-size: 17px;
+    padding-right: 10px;
+}
+
+    .artist_name:not(span)
+    { 
+        font-weight: 700;
+        font-size: 20px;
+
+    }
+
+.artist_country
+{
+    
+}
+
+.artist_country span
+{
+    font-weight: 700;
+    font-size: 17px;
+    padding-right: 5px;
+}
+
+    .artist_country:not(span)
+    {
+        font-weight: 500;
+        font-size: 13px;
+    }
+
+
+.albums
+{
+}

@@ -1,17 +1,47 @@
 ﻿@model IEnumerable<CosmosMusic.Models.Genre>
 
 @{
-    ViewBag.Title = "Albums index";
+    ViewBag.Title = "Genres";
 }
 
-<h2>Browsing Genres:</h2>
-<br />
 
-<div class="music" >
-    <ul>
+<link href="~/Scripts/lMenu/styles1.css" rel="stylesheet" />
+<script src="~/Scripts/lMenu/sliding_effect.js"></script>
+
+
+<!-- <div style = "float:left;position:fixed"> -->
+<div id="genreContainer">
+<div style="width:951px;"><h2 style="font-size:24px;">Browsing Genres:</h2></div>
+
+<div id="genreUlList" style="width:20%; margin-left: 8px; float:left;">
+    <ul id="sliding-navigation" >
         @foreach (var genre in Model)
         {
-            <li>@Html.ActionLink(genre.name, "Browse", new {genre = genre.name})</li>
+            <li class="sliding-element">@Html.ActionLink(genre.name, "Browse", new { genre = genre.name })</li>
         }
     </ul>
+</div> 
+<script>
+    var heightList = $('#genreUlList').height();
+    $('#genreContainer').css('height', heightList);
+    console.log('height: ' + heightList);
+</script>
+<div id="genreList" style="width:75%;margin-left:220px;">
+        <script>
+            $(function () {
+                $('.sliding-element').on('click', function (e) {
+                    var link = $(this).children().prop('href');
+                    $.get(link, function (response) {
+                        //console.log(response);
+                        $('#genreList').html(response);
+                        var maxHeight = Math.max($('#genreList').height(), $('#genreUlList').height());
+                        console.log(maxHeight);
+                    });
+                    e.preventDefault();
+                });
+            });
+        </script>
+    
+</div>
+
 </div>

@@ -213,6 +213,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\artist_details.css" />
     <Content Include="Content\Backload\content-types\128\Excel.png" />
     <Content Include="Content\Backload\content-types\128\File.png" />
     <Content Include="Content\Backload\content-types\128\FileNotFound.png" />
@@ -293,6 +294,10 @@
     <Content Include="Content\Backload\content-types\96\PowerPoint.png" />
     <Content Include="Content\Backload\content-types\96\Text.png" />
     <Content Include="Content\Backload\content-types\96\Word.png" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\FileUpload\cors\postmessage.html" />
     <Content Include="Content\FileUpload\cors\result.html" />
     <Content Include="Content\FileUpload\css\bootstrap\bootstrap-image-gallery.debug.css" />
@@ -307,6 +312,7 @@
     <Content Include="Content\FileUpload\img\loading.gif" />
     <Content Include="Content\FileUpload\img\progressbar.gif" />
     <Content Include="Content\FileUpload\img\progressblue.gif" />
+    <Content Include="Content\grid.css" />
     <Content Include="Content\Images\banner.jpg" />
     <Content Include="Content\Images\default_cover.png" />
     <Content Include="Content\Music.css" />
@@ -374,6 +380,7 @@
     <Content Include="Content\Themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\Themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Content\Validation.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="Models\DbEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -392,6 +399,8 @@
       <DependentUpon>DbEntities.edmx</DependentUpon>
       <LastGenOutput>DbEntities.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\chosen\chosen-sprite%402x.png" />
     <Content Include="Scripts\chosen\chosen-sprite.png" />
     <Content Include="Scripts\chosen\chosen.css" />
@@ -428,8 +437,14 @@
     <Content Include="Scripts\FileUpload\jqueryui\jquery.ui.widget.js" />
     <Content Include="Scripts\FileUpload\load-image.debug.js" />
     <Content Include="Scripts\FileUpload\tmpl.debug.js" />
+    <Content Include="Scripts\isotope.pkgd.min.js" />
     <Content Include="Scripts\jplayer\jPlayer_blue.monday_extd.psd" />
     <Content Include="Scripts\jplayer\spirites_blue.monday_2011.psd" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\Aw3_lightbox.js" />
     <Content Include="Scripts\close.png" />
@@ -453,6 +468,12 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\lMenu\background.jpg" />
+    <Content Include="Scripts\lMenu\heading_bg.jpg" />
+    <Content Include="Scripts\lMenu\navigation.jpg" />
+    <Content Include="Scripts\lMenu\sliding_effect.js" />
+    <Content Include="Scripts\lMenu\styles1.css" />
+    <Content Include="Scripts\lMenu\tab_bg.jpg" />
     <Content Include="Scripts\SooperFish\images\arrows-black.png" />
     <Content Include="Scripts\SooperFish\images\arrows-white.png" />
     <Content Include="Scripts\SooperFish\jquery.easing-sooper.js" />
@@ -508,6 +529,7 @@
     <Content Include="Views\BackloadDemo\Index.cshtml" />
     <Content Include="Views\User\History.cshtml" />
     <Content Include="Views\Music\PartialAlbums.cshtml" />
+    <Content Include="Views\Music\_GenreList.cshtml" />
     <None Include="Web.Backload.Default.config" />
     <None Include="Web.Backload.xsd">
       <SubType>Designer</SubType>
